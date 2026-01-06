@@ -15,7 +15,7 @@ export default function PlaygroundPage() {
         </div>
         <nav className="flex items-center gap-4">
           <a
-            href="https://github.com/your-org/ai-registry"
+            href="https://github.com/endalk200/ai-registry"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-muted-foreground hover:text-foreground transition-colors"
