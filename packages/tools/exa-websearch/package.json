@@ -1,0 +1,56 @@
+{
+  "name": "@ai-registry/exa-websearch",
+  "version": "0.1.0",
+  "description": "Exa-powered web search tool for Vercel AI SDK agents",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "ai",
+    "vercel-ai-sdk",
+    "exa",
+    "web-search",
+    "tool",
+    "agent",
+    "llm"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.24.4"
+  },
+  "peerDependencies": {
+    "ai": "^4.0.0 || ^5.0.0 || ^6.0.0"
+  },
+  "devDependencies": {
+    "@ai-registry/eslint-config": "workspace:*",
+    "@ai-registry/typescript-config": "workspace:*",
+    "@types/node": "^22.15.0",
+    "ai": "^6.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ai-registry.git",
+    "directory": "packages/tools/exa-websearch"
+  }
+}
