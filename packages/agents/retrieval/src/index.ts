@@ -2,8 +2,10 @@ import { ToolLoopAgent, Output, stepCountIs } from "ai";
 import { z } from "zod";
 import {
   exaWebSearch,
+  exaWebContents,
   type ExaWebSearchConfig,
-} from "@ai-registry/exa-websearch";
+  type ExaContentsConfig,
+} from "@ai-registry/exa";
 import type {
   RetrievalAgentConfig,
   RetrievalStructuredOutput,
@@ -73,6 +75,18 @@ function buildWebSearchConfig(
   // Create a copy without the 'enabled' property for exaWebSearch
   const { enabled: _, ...exaConfig } = webSearchConfig;
   return exaConfig;
+}
+
+function buildWebContentsConfig(
+  webSearchConfig: RetrievalAgentConfig["webSearch"],
+): ExaContentsConfig {
+  if (!webSearchConfig) return {};
+  const { enabled: _, ...exaConfig } = webSearchConfig;
+  return {
+    apiKey: exaConfig.apiKey,
+    timeoutMs: exaConfig.timeoutMs,
+    contents: exaConfig.contents,
+  };
 }
 
 /**
@@ -219,8 +233,15 @@ export function createRetrievalAgent(
 
   // Build tools object
   const webSearchTool = exaWebSearch(exaConfig);
+  const webContentsTool = exaWebContents(
+    buildWebContentsConfig(webSearchConfig),
+  );
   const tools = webSearchEnabled
-    ? { webSearch: webSearchTool, ...additionalTools }
+    ? {
+        webSearch: webSearchTool,
+        webContents: webContentsTool,
+        ...additionalTools,
+      }
     : additionalTools;
 
   // Common agent settings
@@ -363,7 +384,7 @@ export const RetrievalAgentPresets = {
         Include code examples when relevant.
         Note version numbers and compatibility information.`,
       webSearch: {
-        type: "keyword",
+        type: "auto",
         numResults: 10,
         includeDomains: [
           "docs.python.org",
@@ -402,10 +423,10 @@ export type {
 export { Output, ToolLoopAgent, tool, stepCountIs } from "ai";
 export type { ToolSet, ToolLoopAgentSettings } from "ai";
 
-// Re-export exa-websearch for convenience
-export { exaWebSearch } from "@ai-registry/exa-websearch";
+// Re-export exa tool for convenience
+export { exaWebSearch } from "@ai-registry/exa";
 export type {
   ExaWebSearchConfig,
   ExaApiResponse,
   ExaSearchResult,
-} from "@ai-registry/exa-websearch";
+} from "@ai-registry/exa";

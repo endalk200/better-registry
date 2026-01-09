@@ -1,5 +1,5 @@
 import type { LanguageModel, ToolSet } from "ai";
-import type { ExaWebSearchConfig } from "@ai-registry/exa-websearch";
+import type { ExaWebSearchConfig } from "@ai-registry/exa";
 
 /**
  * Configuration for the retrieval agent's web search capabilities
