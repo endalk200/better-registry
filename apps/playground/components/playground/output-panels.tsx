@@ -41,7 +41,7 @@ export function OutputPanels({
   error,
 }: OutputPanelsProps) {
   const hasOutput = Boolean(
-    responseText || toolCalls.length > 0 || messages.length > 0 || error
+    responseText || toolCalls.length > 0 || messages.length > 0 || error,
   );
 
   return (
@@ -201,7 +201,7 @@ function ToolCallCard({ call }: { call: ToolCallInfo }) {
       <div
         className={cn(
           "flex items-center gap-2 px-3 py-2 text-xs",
-          isComplete ? "bg-muted/50" : "bg-primary/5"
+          isComplete ? "bg-muted/50" : "bg-primary/5",
         )}
       >
         {isComplete ? (
@@ -382,7 +382,7 @@ function DetailsCard({
   details: Record<string, number | undefined>;
 }) {
   const entries = Object.entries(details).filter(
-    ([, v]) => typeof v === "number" && Number.isFinite(v)
+    ([, v]) => typeof v === "number" && Number.isFinite(v),
   );
 
   if (entries.length === 0) return null;

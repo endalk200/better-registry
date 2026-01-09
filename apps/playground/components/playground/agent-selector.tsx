@@ -65,7 +65,7 @@ export function AgentSelector({
       }
       return acc;
     },
-    {}
+    {},
   );
 
   return (
@@ -99,7 +99,7 @@ export function AgentSelector({
                             "w-full text-left px-3 py-2.5 transition-colors",
                             "hover:bg-muted/50",
                             "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-                            isSelected && "bg-muted ring-1 ring-primary/20"
+                            isSelected && "bg-muted ring-1 ring-primary/20",
                           )}
                         >
                           <div className="flex items-start gap-2.5">
@@ -108,7 +108,7 @@ export function AgentSelector({
                                 "mt-0.5 rounded-sm p-1.5",
                                 isSelected
                                   ? "bg-primary/10 text-primary"
-                                  : "bg-muted text-muted-foreground"
+                                  : "bg-muted text-muted-foreground",
                               )}
                             >
                               <AgentIcon className="size-3.5" />
@@ -118,7 +118,7 @@ export function AgentSelector({
                                 <span
                                   className={cn(
                                     "text-xs font-medium truncate",
-                                    isSelected && "text-primary"
+                                    isSelected && "text-primary",
                                   )}
                                 >
                                   {agent.name}
@@ -141,7 +141,7 @@ export function AgentSelector({
                   </div>
                 </div>
               );
-            }
+            },
           )}
         </div>
       </ScrollArea>

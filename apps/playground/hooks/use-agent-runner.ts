@@ -133,7 +133,7 @@ export function useAgentRunner({
                 : {};
 
             const existingIndex = calls.findIndex(
-              (c) => c.toolCallId === toolCallId
+              (c) => c.toolCallId === toolCallId,
             );
 
             const isResult =
@@ -203,11 +203,11 @@ export function useAgentRunner({
       } catch (err) {
         setRunState("error");
         setError(
-          err instanceof Error ? err.message : "Failed to start agent request"
+          err instanceof Error ? err.message : "Failed to start agent request",
         );
       }
     },
-    [agent, sendMessage, setMessages]
+    [agent, sendMessage, setMessages],
   );
 
   const stopRun = useCallback(() => {
