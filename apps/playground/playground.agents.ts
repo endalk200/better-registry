@@ -156,7 +156,7 @@ export function getAgentsByCategory(): Record<string, AgentDefinition[]> {
       }
       return acc;
     },
-    {}
+    {},
   );
 }
 
@@ -174,25 +174,27 @@ export type AgentMetadata = Omit<
 };
 
 export function getAgentMetadataList(): AgentMetadata[] {
-  return agentRegistry.map(({ createAgent, inputSchema, ...rest }) => ({
-    ...rest,
-    inputSchemaShape: Object.fromEntries(
-      Object.entries(inputSchema.shape).map(([key, value]) => {
-        const zodValue = value as z.ZodTypeAny;
-        const isOptional = zodValue.isOptional();
-        const innerType = isOptional
-          ? (zodValue as z.ZodOptional<z.ZodTypeAny>)._def.innerType
-          : zodValue;
-        return [
-          key,
-          {
-            type:
-              innerType._def.typeName === "ZodString" ? "string" : "unknown",
-            description: innerType._def.description,
-            optional: isOptional,
-          },
-        ];
-      })
-    ),
-  }));
+  return agentRegistry.map(
+    ({ createAgent: _createAgent, inputSchema, ...rest }) => ({
+      ...rest,
+      inputSchemaShape: Object.fromEntries(
+        Object.entries(inputSchema.shape).map(([key, value]) => {
+          const zodValue = value as z.ZodTypeAny;
+          const isOptional = zodValue.isOptional();
+          const innerType = isOptional
+            ? (zodValue as z.ZodOptional<z.ZodTypeAny>)._def.innerType
+            : zodValue;
+          return [
+            key,
+            {
+              type:
+                innerType._def.typeName === "ZodString" ? "string" : "unknown",
+              description: innerType._def.description,
+              optional: isOptional,
+            },
+          ];
+        }),
+      ),
+    }),
+  );
 }

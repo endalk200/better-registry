@@ -43,7 +43,7 @@ function ResizableHandle({
       data-slot="resizable-handle"
       className={cn(
         "bg-border relative flex w-1 items-center justify-center hover:bg-primary/20 transition-colors",
-        className
+        className,
       )}
       {...props}
     >

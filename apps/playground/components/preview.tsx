@@ -1,12 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useState } from "react"
+import * as React from "react";
+import { useState } from "react";
 
-import {
-  Example,
-  ExampleWrapper,
-} from '@/components/example'
+import { Example, ExampleWrapper } from "@/components/example";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,16 +15,16 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
+} from "@/components/ui/alert-dialog";
 import {
   Avatar,
   AvatarFallback,
   AvatarGroup,
   AvatarImage,
-} from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { ButtonGroup } from '@/components/ui/button-group'
+} from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
 import {
   Card,
   CardAction,
@@ -36,8 +33,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Combobox,
   ComboboxContent,
@@ -45,7 +42,7 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-} from '@/components/ui/combobox'
+} from "@/components/ui/combobox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -62,7 +59,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 import {
   Empty,
   EmptyContent,
@@ -70,7 +67,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@/components/ui/empty'
+} from "@/components/ui/empty";
 import {
   Field,
   FieldContent,
@@ -81,8 +78,8 @@ import {
   FieldSeparator,
   FieldSet,
   FieldTitle,
-} from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
@@ -90,7 +87,7 @@ import {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
-} from '@/components/ui/input-group'
+} from "@/components/ui/input-group";
 import {
   Item,
   ItemActions,
@@ -98,8 +95,8 @@ import {
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from '@/components/ui/item'
-import { Label } from '@/components/ui/label'
+} from "@/components/ui/item";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -107,11 +104,8 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '@/components/ui/radio-group'
+} from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -119,8 +113,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Separator } from '@/components/ui/separator'
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -130,17 +124,61 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
-import { Slider } from '@/components/ui/slider'
-import { Spinner } from '@/components/ui/spinner'
-import { Switch } from '@/components/ui/switch'
-import { Textarea } from '@/components/ui/textarea'
+} from "@/components/ui/sheet";
+import { Slider } from "@/components/ui/slider";
+import { Spinner } from "@/components/ui/spinner";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { MinusIcon, PlusIcon, ArrowLeftIcon, CaretDownIcon, EnvelopeIcon, ArchiveIcon, ClockIcon, CalendarPlusIcon, ListPlusIcon, TagIcon, TrashIcon, ArrowRightIcon, SpeakerSlashIcon, CheckIcon, UserMinusIcon, ShareIcon, CopyIcon, WarningIcon, RobotIcon, MagnifyingGlassIcon, InfoIcon, StarIcon, MicrophoneIcon, ArrowUpIcon, BluetoothIcon, DotsThreeVerticalIcon, FileIcon, FolderIcon, FolderOpenIcon, CodeIcon, DotsThreeOutlineIcon, FloppyDiskIcon, DownloadIcon, EyeIcon, LayoutIcon, PaletteIcon, SunIcon, MoonIcon, MonitorIcon, QuestionIcon, FileTextIcon, SignOutIcon, BagIcon } from "@phosphor-icons/react"
+} from "@/components/ui/tooltip";
+import {
+  MinusIcon,
+  PlusIcon,
+  ArrowLeftIcon,
+  CaretDownIcon,
+  EnvelopeIcon,
+  ArchiveIcon,
+  ClockIcon,
+  CalendarPlusIcon,
+  ListPlusIcon,
+  TagIcon,
+  TrashIcon,
+  ArrowRightIcon,
+  SpeakerSlashIcon,
+  CheckIcon,
+  UserMinusIcon,
+  ShareIcon,
+  CopyIcon,
+  WarningIcon,
+  RobotIcon,
+  MagnifyingGlassIcon,
+  InfoIcon,
+  StarIcon,
+  MicrophoneIcon,
+  ArrowUpIcon,
+  BluetoothIcon,
+  DotsThreeVerticalIcon,
+  FileIcon,
+  FolderIcon,
+  FolderOpenIcon,
+  CodeIcon,
+  DotsThreeOutlineIcon,
+  FloppyDiskIcon,
+  DownloadIcon,
+  EyeIcon,
+  LayoutIcon,
+  PaletteIcon,
+  SunIcon,
+  MoonIcon,
+  MonitorIcon,
+  QuestionIcon,
+  FileTextIcon,
+  SignOutIcon,
+  BagIcon,
+} from "@phosphor-icons/react";
 
 export function CoverExample() {
   return (
@@ -156,28 +194,28 @@ export function CoverExample() {
       <SheetExample />
       <BadgeExamples />
     </ExampleWrapper>
-  )
+  );
 }
 
 function FieldExamples() {
-  const [gpuCount, setGpuCount] = React.useState(8)
-  const [value, setValue] = useState([200, 800])
+  const [gpuCount, setGpuCount] = React.useState(8);
+  const [value, setValue] = useState([200, 800]);
 
   const handleGpuAdjustment = React.useCallback((adjustment: number) => {
     setGpuCount((prevCount) =>
-      Math.max(1, Math.min(99, prevCount + adjustment))
-    )
-  }, [])
+      Math.max(1, Math.min(99, prevCount + adjustment)),
+    );
+  }, []);
 
   const handleGpuInputChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = parseInt(e.target.value, 10)
+      const value = parseInt(e.target.value, 10);
       if (!isNaN(value) && value >= 1 && value <= 99) {
-        setGpuCount(value)
+        setGpuCount(value);
       }
     },
-    []
-  )
+    [],
+  );
 
   return (
     <Example title="Fields">
@@ -247,8 +285,7 @@ function FieldExamples() {
                 onClick={() => handleGpuAdjustment(-1)}
                 disabled={gpuCount <= 1}
               >
-                <MinusIcon
-                />
+                <MinusIcon />
               </Button>
               <Button
                 variant="outline"
@@ -258,8 +295,7 @@ function FieldExamples() {
                 onClick={() => handleGpuAdjustment(1)}
                 disabled={gpuCount >= 99}
               >
-                <PlusIcon
-                />
+                <PlusIcon />
               </Button>
             </ButtonGroup>
           </Field>
@@ -310,11 +346,11 @@ function FieldExamples() {
         </FieldGroup>
       </FieldSet>
     </Example>
-  )
+  );
 }
 
 function ButtonGroupExamples() {
-  const [label, setLabel] = React.useState("personal")
+  const [label, setLabel] = React.useState("personal");
 
   return (
     <Example title="Button Group" className="items-center justify-center">
@@ -322,8 +358,7 @@ function ButtonGroupExamples() {
         <ButtonGroup>
           <ButtonGroup className="hidden sm:flex">
             <Button variant="outline" size="icon-sm" aria-label="Go Back">
-              <ArrowLeftIcon
-              />
+              <ArrowLeftIcon />
             </Button>
           </ButtonGroup>
           <ButtonGroup>
@@ -339,42 +374,45 @@ function ButtonGroupExamples() {
               Snooze
             </Button>
             <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="outline" size="icon-sm" aria-label="More Options"><CaretDownIcon
-                /></Button>} />
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
+                    aria-label="More Options"
+                  >
+                    <CaretDownIcon />
+                  </Button>
+                }
+              />
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <EnvelopeIcon
-                    />
+                    <EnvelopeIcon />
                     Mark as Read
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <ArchiveIcon
-                    />
+                    <ArchiveIcon />
                     Archive
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <ClockIcon
-                    />
+                    <ClockIcon />
                     Snooze
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <CalendarPlusIcon
-                    />
+                    <CalendarPlusIcon />
                     Add to Calendar
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <ListPlusIcon
-                    />
+                    <ListPlusIcon />
                     Add to List
                   </DropdownMenuItem>
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                      <TagIcon
-                      />
+                      <TagIcon />
                       Label As...
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
@@ -402,8 +440,7 @@ function ButtonGroupExamples() {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem variant="destructive">
-                    <TrashIcon
-                    />
+                    <TrashIcon />
                     Trash
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
@@ -412,12 +449,10 @@ function ButtonGroupExamples() {
           </ButtonGroup>
           <ButtonGroup className="hidden sm:flex">
             <Button variant="outline" size="icon-sm" aria-label="Previous">
-              <ArrowLeftIcon
-              />
+              <ArrowLeftIcon />
             </Button>
             <Button variant="outline" size="icon-sm" aria-label="Next">
-              <ArrowRightIcon
-              />
+              <ArrowRightIcon />
             </Button>
           </ButtonGroup>
         </ButtonGroup>
@@ -433,24 +468,26 @@ function ButtonGroupExamples() {
             <ButtonGroup>
               <Button variant="outline">Follow</Button>
               <DropdownMenu>
-                <DropdownMenuTrigger render={<Button variant="outline" size="icon"><CaretDownIcon
-                  /></Button>} />
+                <DropdownMenuTrigger
+                  render={
+                    <Button variant="outline" size="icon">
+                      <CaretDownIcon />
+                    </Button>
+                  }
+                />
                 <DropdownMenuContent align="end" className="w-52">
                   <DropdownMenuGroup>
                     <DropdownMenuLabel>Quick Actions</DropdownMenuLabel>
                     <DropdownMenuItem>
-                      <SpeakerSlashIcon
-                      />
+                      <SpeakerSlashIcon />
                       Mute Conversation
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <CheckIcon
-                      />
+                      <CheckIcon />
                       Mark as Read
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <UserMinusIcon
-                      />
+                      <UserMinusIcon />
                       Block User
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -458,26 +495,22 @@ function ButtonGroupExamples() {
                   <DropdownMenuGroup>
                     <DropdownMenuLabel>Conversation</DropdownMenuLabel>
                     <DropdownMenuItem>
-                      <ShareIcon
-                      />
+                      <ShareIcon />
                       Share Conversation
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <CopyIcon
-                      />
+                      <CopyIcon />
                       Copy Conversation
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <WarningIcon
-                      />
+                      <WarningIcon />
                       Report Conversation
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
                     <DropdownMenuItem variant="destructive">
-                      <TrashIcon
-                      />
+                      <TrashIcon />
                       Delete Conversation
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -486,13 +519,20 @@ function ButtonGroupExamples() {
             </ButtonGroup>
             <ButtonGroup>
               <Button variant="outline">
-                <RobotIcon
-                />{" "}
-                Copilot
+                <RobotIcon /> Copilot
               </Button>
               <Popover>
-                <PopoverTrigger render={<Button variant="outline" size="icon" aria-label="Open Popover"><CaretDownIcon
-                  /></Button>} />
+                <PopoverTrigger
+                  render={
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      aria-label="Open Popover"
+                    >
+                      <CaretDownIcon />
+                    </Button>
+                  }
+                />
                 <PopoverContent align="end" className="w-96">
                   <PopoverHeader>
                     <PopoverTitle>Agent Tasks</PopoverTitle>
@@ -514,12 +554,12 @@ function ButtonGroupExamples() {
         </div>
       </div>
     </Example>
-  )
+  );
 }
 
 function InputGroupExamples() {
-  const [isFavorite, setIsFavorite] = React.useState(false)
-  const [voiceEnabled, setVoiceEnabled] = React.useState(false)
+  const [isFavorite, setIsFavorite] = React.useState(false);
+  const [voiceEnabled, setVoiceEnabled] = React.useState(false);
 
   return (
     <Example title="Input Group">
@@ -527,8 +567,7 @@ function InputGroupExamples() {
         <InputGroup>
           <InputGroupInput placeholder="Search..." />
           <InputGroupAddon>
-            <MagnifyingGlassIcon
-            />
+            <MagnifyingGlassIcon />
           </InputGroupAddon>
           <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
         </InputGroup>
@@ -539,8 +578,17 @@ function InputGroupExamples() {
           </InputGroupAddon>
           <InputGroupAddon align="inline-end">
             <Tooltip>
-              <TooltipTrigger render={<InputGroupButton className="rounded-full" size="icon-xs" aria-label="Info"><InfoIcon
-                /></InputGroupButton>} />
+              <TooltipTrigger
+                render={
+                  <InputGroupButton
+                    className="rounded-full"
+                    size="icon-xs"
+                    aria-label="Info"
+                  >
+                    <InfoIcon />
+                  </InputGroupButton>
+                }
+              />
               <TooltipContent>This is content in a tooltip.</TooltipContent>
             </Tooltip>
           </InputGroupAddon>
@@ -553,8 +601,17 @@ function InputGroupExamples() {
             <InputGroupInput id="input-secure-19" className="!pl-0.5" />
             <InputGroupAddon>
               <Popover>
-                <PopoverTrigger render={<InputGroupButton variant="secondary" size="icon-xs" aria-label="Info"><InfoIcon
-                  /></InputGroupButton>} />
+                <PopoverTrigger
+                  render={
+                    <InputGroupButton
+                      variant="secondary"
+                      size="icon-xs"
+                      aria-label="Info"
+                    >
+                      <InfoIcon />
+                    </InputGroupButton>
+                  }
+                />
                 <PopoverContent
                   align="start"
                   alignOffset={10}
@@ -576,7 +633,10 @@ function InputGroupExamples() {
                 size="icon-xs"
                 aria-label="Favorite"
               >
-                <StarIcon data-favorite={isFavorite} className="data-[favorite=true]:fill-primary data-[favorite=true]:stroke-primary" />
+                <StarIcon
+                  data-favorite={isFavorite}
+                  className="data-[favorite=true]:fill-primary data-[favorite=true]:stroke-primary"
+                />
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
@@ -584,8 +644,7 @@ function InputGroupExamples() {
         <ButtonGroup className="w-full">
           <ButtonGroup>
             <Button variant="outline" size="icon" aria-label="Add">
-              <PlusIcon
-              />
+              <PlusIcon />
             </Button>
           </ButtonGroup>
           <ButtonGroup className="flex-1">
@@ -600,8 +659,20 @@ function InputGroupExamples() {
               />
               <InputGroupAddon align="inline-end">
                 <Tooltip>
-                  <TooltipTrigger render={<InputGroupButton onClick={() => setVoiceEnabled(!voiceEnabled)} data-active={voiceEnabled} className="data-[active=true]:bg-primary data-[active=true]:text-primary-foreground" aria-pressed={voiceEnabled} size="icon-xs" aria-label="Voice Mode"><MicrophoneIcon
-                    /></InputGroupButton>} />
+                  <TooltipTrigger
+                    render={
+                      <InputGroupButton
+                        onClick={() => setVoiceEnabled(!voiceEnabled)}
+                        data-active={voiceEnabled}
+                        className="data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
+                        aria-pressed={voiceEnabled}
+                        size="icon-xs"
+                        aria-label="Voice Mode"
+                      >
+                        <MicrophoneIcon />
+                      </InputGroupButton>
+                    }
+                  />
                   <TooltipContent>Voice Mode</TooltipContent>
                 </Tooltip>
               </InputGroupAddon>
@@ -617,11 +688,14 @@ function InputGroupExamples() {
               size="icon-xs"
               aria-label="Add"
             >
-              <PlusIcon
-              />
+              <PlusIcon />
             </InputGroupButton>
             <DropdownMenu>
-              <DropdownMenuTrigger render={<InputGroupButton variant="ghost">Auto</InputGroupButton>} />
+              <DropdownMenuTrigger
+                render={
+                  <InputGroupButton variant="ghost">Auto</InputGroupButton>
+                }
+              />
               <DropdownMenuContent
                 side="top"
                 align="start"
@@ -641,15 +715,14 @@ function InputGroupExamples() {
               className="style-lyra:rounded-none rounded-full"
               size="icon-xs"
             >
-              <ArrowUpIcon
-              />
+              <ArrowUpIcon />
               <span className="sr-only">Send</span>
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
       </div>
     </Example>
-  )
+  );
 }
 
 function EmptyAvatarGroup() {
@@ -690,7 +763,9 @@ function EmptyAvatarGroup() {
         <EmptyContent>
           <div className="flex gap-2">
             <AlertDialog>
-              <AlertDialogTrigger render={<Button variant="outline">Show Dialog</Button>} />
+              <AlertDialogTrigger
+                render={<Button variant="outline">Show Dialog</Button>}
+              />
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -710,8 +785,7 @@ function EmptyAvatarGroup() {
               <AlertDialogContent size="sm">
                 <AlertDialogHeader>
                   <AlertDialogMedia>
-                    <BluetoothIcon
-                    />
+                    <BluetoothIcon />
                   </AlertDialogMedia>
                   <AlertDialogTitle>
                     Allow accessory to connect?
@@ -731,7 +805,7 @@ function EmptyAvatarGroup() {
         </EmptyContent>
       </Empty>
     </Example>
-  )
+  );
 }
 
 function FormExample() {
@@ -749,7 +823,7 @@ function FormExample() {
     { label: "10", value: "10" },
     { label: "11", value: "11" },
     { label: "12", value: "12" },
-  ]
+  ];
 
   const yearItems = [
     { label: "YYYY", value: null },
@@ -759,7 +833,7 @@ function FormExample() {
     { label: "2027", value: "2027" },
     { label: "2028", value: "2028" },
     { label: "2029", value: "2029" },
-  ]
+  ];
 
   return (
     <Example title="Complex Form">
@@ -892,7 +966,7 @@ function FormExample() {
         </CardContent>
       </Card>
     </Example>
-  )
+  );
 }
 
 const frameworks = [
@@ -901,22 +975,22 @@ const frameworks = [
   "Nuxt.js",
   "Remix",
   "Astro",
-] as const
+] as const;
 
 const roleItems = [
   { label: "Developer", value: "developer" },
   { label: "Designer", value: "designer" },
   { label: "Manager", value: "manager" },
   { label: "Other", value: "other" },
-]
+];
 
 function SmallFormExample() {
   const [notifications, setNotifications] = React.useState({
     email: true,
     sms: false,
     push: true,
-  })
-  const [theme, setTheme] = React.useState("light")
+  });
+  const [theme, setTheme] = React.useState("light");
 
   return (
     <Example title="Form">
@@ -926,8 +1000,14 @@ function SmallFormExample() {
           <CardDescription>Please fill in your details below</CardDescription>
           <CardAction>
             <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="ghost" size="icon"><DotsThreeVerticalIcon
-                /><span className="sr-only">More options</span></Button>} />
+              <DropdownMenuTrigger
+                render={
+                  <Button variant="ghost" size="icon">
+                    <DotsThreeVerticalIcon />
+                    <span className="sr-only">More options</span>
+                  </Button>
+                }
+              />
               <DropdownMenuContent
                 align="end"
                 className="style-maia:w-56 style-mira:w-48 style-nova:w-48 style-vega:w-56 style-lyra:w-48"
@@ -935,21 +1015,18 @@ function SmallFormExample() {
                 <DropdownMenuGroup>
                   <DropdownMenuLabel>File</DropdownMenuLabel>
                   <DropdownMenuItem>
-                    <FileIcon
-                    />
+                    <FileIcon />
                     New File
                     <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <FolderIcon
-                    />
+                    <FolderIcon />
                     New Folder
                     <DropdownMenuShortcut>⇧⌘N</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                      <FolderOpenIcon
-                      />
+                      <FolderOpenIcon />
                       Open Recent
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
@@ -957,31 +1034,26 @@ function SmallFormExample() {
                         <DropdownMenuGroup>
                           <DropdownMenuLabel>Recent Projects</DropdownMenuLabel>
                           <DropdownMenuItem>
-                            <CodeIcon
-                            />
+                            <CodeIcon />
                             Project Alpha
                           </DropdownMenuItem>
                           <DropdownMenuItem>
-                            <CodeIcon
-                            />
+                            <CodeIcon />
                             Project Beta
                           </DropdownMenuItem>
                           <DropdownMenuSub>
                             <DropdownMenuSubTrigger>
-                              <DotsThreeOutlineIcon
-                              />
+                              <DotsThreeOutlineIcon />
                               More Projects
                             </DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
                               <DropdownMenuSubContent>
                                 <DropdownMenuItem>
-                                  <CodeIcon
-                                  />
+                                  <CodeIcon />
                                   Project Gamma
                                 </DropdownMenuItem>
                                 <DropdownMenuItem>
-                                  <CodeIcon
-                                  />
+                                  <CodeIcon />
                                   Project Delta
                                 </DropdownMenuItem>
                               </DropdownMenuSubContent>
@@ -991,8 +1063,7 @@ function SmallFormExample() {
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                           <DropdownMenuItem>
-                            <MagnifyingGlassIcon
-                            />
+                            <MagnifyingGlassIcon />
                             Browse...
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
@@ -1001,14 +1072,12 @@ function SmallFormExample() {
                   </DropdownMenuSub>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <FloppyDiskIcon
-                    />
+                    <FloppyDiskIcon />
                     Save
                     <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <DownloadIcon
-                    />
+                    <DownloadIcon />
                     Export
                     <DropdownMenuShortcut>⇧⌘E</DropdownMenuShortcut>
                   </DropdownMenuItem>
@@ -1025,8 +1094,7 @@ function SmallFormExample() {
                       })
                     }
                   >
-                    <EyeIcon
-                    />
+                    <EyeIcon />
                     Show Sidebar
                   </DropdownMenuCheckboxItem>
                   <DropdownMenuCheckboxItem
@@ -1038,14 +1106,12 @@ function SmallFormExample() {
                       })
                     }
                   >
-                    <LayoutIcon
-                    />
+                    <LayoutIcon />
                     Show Status Bar
                   </DropdownMenuCheckboxItem>
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                      <PaletteIcon
-                      />
+                      <PaletteIcon />
                       Theme
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
@@ -1057,18 +1123,15 @@ function SmallFormExample() {
                             onValueChange={setTheme}
                           >
                             <DropdownMenuRadioItem value="light">
-                              <SunIcon
-                              />
+                              <SunIcon />
                               Light
                             </DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="dark">
-                              <MoonIcon
-                              />
+                              <MoonIcon />
                               Dark
                             </DropdownMenuRadioItem>
                             <DropdownMenuRadioItem value="system">
-                              <MonitorIcon
-                              />
+                              <MonitorIcon />
                               System
                             </DropdownMenuRadioItem>
                           </DropdownMenuRadioGroup>
@@ -1080,21 +1143,18 @@ function SmallFormExample() {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <QuestionIcon
-                    />
+                    <QuestionIcon />
                     Help & Support
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <FileTextIcon
-                    />
+                    <FileTextIcon />
                     Documentation
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem variant="destructive">
-                    <SignOutIcon
-                    />
+                    <SignOutIcon />
                     Sign Out
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                   </DropdownMenuItem>
@@ -1173,7 +1233,7 @@ function SmallFormExample() {
         </CardContent>
       </Card>
     </Example>
-  )
+  );
 }
 
 function ObservabilityCard() {
@@ -1197,8 +1257,7 @@ function ObservabilityCard() {
         </CardHeader>
         <CardFooter>
           <Button>
-            Create Query{" "}
-            <PlusIcon data-icon="inline-end" />
+            Create Query <PlusIcon data-icon="inline-end" />
           </Button>
           <Badge variant="secondary" className="ml-auto">
             Warning
@@ -1206,7 +1265,7 @@ function ObservabilityCard() {
         </CardFooter>
       </Card>
     </Example>
-  )
+  );
 }
 
 function ItemExample() {
@@ -1226,15 +1285,23 @@ function ItemExample() {
             </Button>
           </ItemActions>
         </Item>
-        <Item variant="outline" size="sm" render={<a href="#"><ItemMedia variant="icon">
-            <BagIcon
-            />
-          </ItemMedia><ItemContent>
-            <ItemTitle>Your order has been shipped.</ItemTitle>
-          </ItemContent></a>} />
+        <Item
+          variant="outline"
+          size="sm"
+          render={
+            <a href="#">
+              <ItemMedia variant="icon">
+                <BagIcon />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle>Your order has been shipped.</ItemTitle>
+              </ItemContent>
+            </a>
+          }
+        />
       </div>
     </Example>
-  )
+  );
 }
 
 function BadgeExamples() {
@@ -1259,7 +1326,7 @@ function BadgeExamples() {
         </Badge>
       </div>
     </Example>
-  )
+  );
 }
 
 function EmptyWithSpinner() {
@@ -1285,10 +1352,10 @@ function EmptyWithSpinner() {
         </EmptyContent>
       </Empty>
     </Example>
-  )
+  );
 }
 
-const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
+const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 
 function SheetExample() {
   return (
@@ -1296,7 +1363,13 @@ function SheetExample() {
       <div className="flex gap-2">
         {SHEET_SIDES.map((side) => (
           <Sheet key={side}>
-            <SheetTrigger render={<Button variant="secondary" className="flex-1 capitalize">{side}</Button>} />
+            <SheetTrigger
+              render={
+                <Button variant="secondary" className="flex-1 capitalize">
+                  {side}
+                </Button>
+              }
+            />
             <SheetContent
               side={side}
               className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
@@ -1327,12 +1400,14 @@ function SheetExample() {
               </div>
               <SheetFooter>
                 <Button type="submit">Save changes</Button>
-                <SheetClose render={<Button variant="outline">Cancel</Button>} />
+                <SheetClose
+                  render={<Button variant="outline">Cancel</Button>}
+                />
               </SheetFooter>
             </SheetContent>
           </Sheet>
         ))}
       </div>
     </Example>
-  )
+  );
 }

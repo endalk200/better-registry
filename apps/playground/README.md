@@ -87,15 +87,15 @@ export const agentRegistry: AgentDefinition[] = [
 
 ### Agent Definition Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | `string` | Unique identifier (e.g., "retrieval.research") |
-| `name` | `string` | Display name shown in the UI |
-| `description` | `string` | Brief description of the agent's purpose |
-| `category` | `string` | Group for organizing agents in the sidebar |
-| `model` | `string` | Model name for display (e.g., "gpt-4o") |
-| `tags` | `string[]` | Tags for filtering and display |
-| `inputSchema` | `ZodSchema` | Zod schema for the run form inputs |
+| Field         | Type                  | Description                                      |
+| ------------- | --------------------- | ------------------------------------------------ |
+| `id`          | `string`              | Unique identifier (e.g., "retrieval.research")   |
+| `name`        | `string`              | Display name shown in the UI                     |
+| `description` | `string`              | Brief description of the agent's purpose         |
+| `category`    | `string`              | Group for organizing agents in the sidebar       |
+| `model`       | `string`              | Model name for display (e.g., "gpt-4o")          |
+| `tags`        | `string[]`            | Tags for filtering and display                   |
+| `inputSchema` | `ZodSchema`           | Zod schema for the run form inputs               |
 | `createAgent` | `() => ToolLoopAgent` | Factory function that returns a configured agent |
 
 ### Custom Input Schemas
@@ -106,8 +106,18 @@ The default `agentInputSchema` provides `prompt` and `context` fields. To add cu
 import { z } from "zod";
 
 const customInputSchema = agentInputSchema.extend({
-  temperature: z.number().min(0).max(2).default(0.7).describe("Model temperature"),
-  maxSteps: z.number().min(1).max(20).default(5).describe("Maximum agent steps"),
+  temperature: z
+    .number()
+    .min(0)
+    .max(2)
+    .default(0.7)
+    .describe("Model temperature"),
+  maxSteps: z
+    .number()
+    .min(1)
+    .max(20)
+    .default(5)
+    .describe("Maximum agent steps"),
 });
 ```
 
@@ -143,13 +153,13 @@ apps/playground/
 
 ### Retrieval Agents
 
-| Agent | Description | Output |
-|-------|-------------|--------|
-| Research Agent | General-purpose research with comprehensive sources | Markdown |
-| Academic Research Agent | Peer-reviewed sources and scientific publications | Structured JSON |
-| News Agent | Current events from the last 7 days | Markdown |
-| Technical Documentation Agent | Official docs, GitHub, Stack Overflow | Markdown |
-| Custom Retrieval Agent | Basic retrieval with default settings | Markdown |
+| Agent                         | Description                                         | Output          |
+| ----------------------------- | --------------------------------------------------- | --------------- |
+| Research Agent                | General-purpose research with comprehensive sources | Markdown        |
+| Academic Research Agent       | Peer-reviewed sources and scientific publications   | Structured JSON |
+| News Agent                    | Current events from the last 7 days                 | Markdown        |
+| Technical Documentation Agent | Official docs, GitHub, Stack Overflow               | Markdown        |
+| Custom Retrieval Agent        | Basic retrieval with default settings               | Markdown        |
 
 ## Development
 

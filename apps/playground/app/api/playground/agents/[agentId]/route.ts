@@ -48,7 +48,7 @@ function normalizeUIMessages(messages: unknown) {
                   Boolean(p) &&
                   typeof p === "object" &&
                   (p as { type?: unknown }).type === "text" &&
-                  typeof (p as { text?: unknown }).text === "string"
+                  typeof (p as { text?: unknown }).text === "string",
               )
               .map((p) => p.text)
               .join("")
@@ -66,7 +66,7 @@ function normalizeUIMessages(messages: unknown) {
 
 export async function POST(
   request: Request,
-  { params }: { params: Promise<{ agentId: string }> }
+  { params }: { params: Promise<{ agentId: string }> },
 ) {
   try {
     const { agentId } = await params;
@@ -79,7 +79,7 @@ export async function POST(
     if (!agentDef) {
       return new Response(
         JSON.stringify({ error: `Agent not found: ${agentId}` }),
-        { status: 404, headers: { "Content-Type": "application/json" } }
+        { status: 404, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -108,7 +108,7 @@ export async function POST(
         error:
           error instanceof Error ? error.message : "Unknown error occurred",
       }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      { status: 500, headers: { "Content-Type": "application/json" } },
     );
   }
 }

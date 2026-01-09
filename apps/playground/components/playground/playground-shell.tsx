@@ -16,7 +16,7 @@ import { Spinner } from "@/components/ui/spinner";
 export function PlaygroundShell() {
   const [agents, setAgents] = useState<AgentMetadata[]>([]);
   const [selectedAgent, setSelectedAgent] = useState<AgentMetadata | null>(
-    null
+    null,
   );
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -52,7 +52,7 @@ export function PlaygroundShell() {
         }
       } catch (err) {
         setLoadError(
-          err instanceof Error ? err.message : "Failed to load agents"
+          err instanceof Error ? err.message : "Failed to load agents",
         );
       } finally {
         setIsLoading(false);
