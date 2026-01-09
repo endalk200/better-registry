@@ -1,7 +1,7 @@
 {
-  "name": "@ai-registry/retrieval-agent",
+  "name": "@ai-registry/exa",
   "version": "0.1.0",
-  "description": "A configurable retrieval agent for Vercel AI SDK v6 with web search capabilities",
+  "description": "Exa tools for Vercel AI SDK agents",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -21,37 +21,40 @@
     "dev": "tsup --watch",
     "lint": "eslint src/",
     "check-types": "tsc --noEmit",
+    "test": "vitest run",
     "clean": "rm -rf dist"
   },
   "keywords": [
     "ai",
     "vercel-ai-sdk",
-    "agent",
-    "retrieval",
+    "exa",
     "web-search",
-    "rag",
+    "tool",
+    "agent",
     "llm"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@ai-registry/exa": "workspace:*",
+    "@effect/platform": "^0.94.1",
+    "effect": "^3.19.14",
     "zod": "^3.24.4"
   },
   "peerDependencies": {
-    "ai": "^6.0.0"
+    "ai": "^4.0.0 || ^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
     "@ai-registry/eslint-config": "workspace:*",
     "@ai-registry/typescript-config": "workspace:*",
-    "@ai-sdk/openai": "^3.0.5",
-    "ai": "^6.0.12",
+    "@types/node": "^22.15.0",
+    "ai": "^6.0.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "^4.0.16"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/endalk200/ai-registry.git",
-    "directory": "packages/agents/retrieval"
+    "directory": "packages/tools/exa"
   }
 }
