@@ -143,7 +143,7 @@ const agent = createRetrievalAgent({
     enabled: true, // Can disable web search
     apiKey: "your-exa-api-key", // Defaults to EXA_API_KEY env var
     numResults: 10,
-    type: "neural", // "auto" | "keyword" | "neural" | "fast" | "deep"
+    type: "neural", // "auto" | "neural" | "fast" | "deep"
     category: "research paper",
     includeDomains: ["arxiv.org", "nature.com"],
     excludeDomains: ["pinterest.com"],
@@ -179,7 +179,12 @@ const agent = createRetrievalAgent({
 
 ### Web Search Configuration
 
-The agent uses `@ai-registry/exa-websearch` under the hood. All Exa search options are available:
+The agent uses `@ai-registry/exa` under the hood.
+
+- `webSearch` uses Exa `POST /search`
+- `webContents` uses Exa `POST /contents` (fetches page text/summaries for known URLs)
+
+All Exa search options are available:
 
 ```typescript
 const agent = createRetrievalAgent({
@@ -382,7 +387,7 @@ import type {
 
 ### Included Dependencies
 
-- `@ai-registry/exa-websearch` - Exa-powered web search tool
+- `@ai-registry/exa` - Exa-powered web search tool
 - `zod` - Schema validation
 
 ## License
@@ -393,4 +398,4 @@ MIT
 
 - [Vercel AI SDK v6 Documentation](https://sdk.vercel.ai/docs)
 - [Exa API Documentation](https://docs.exa.ai)
-- [@ai-registry/exa-websearch](../tools/exa-websearch)
+- [@ai-registry/exa](../tools/exa-websearch)
