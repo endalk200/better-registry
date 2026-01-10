@@ -47,7 +47,7 @@ export interface ExtrasOptions {
  * - "always": Always livecrawl for fresh content
  * - "preferred": Prefer livecrawl but fallback to cached
  */
-export type LivecrawlMode = "never" | "fallback" | "preferred" | "always";
+export type LivecrawlMode = "never" | "fallback" | "always" | "preferred";
 
 /**
  * Contents configuration - controls what content to retrieve from search results
