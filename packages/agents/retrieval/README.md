@@ -398,4 +398,4 @@ MIT
 
 - [Vercel AI SDK v6 Documentation](https://sdk.vercel.ai/docs)
 - [Exa API Documentation](https://docs.exa.ai)
-- [@ai-registry/exa](../tools/exa-websearch)
+- [@ai-registry/exa](../tools/exa)

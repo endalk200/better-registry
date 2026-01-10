@@ -45,15 +45,33 @@ export function exaWebContents(config: ExaContentsConfig = {}) {
       };
 
       if (contents) {
-        requestBody.text = contents.text;
-        requestBody.highlights = contents.highlights;
-        requestBody.summary = contents.summary;
-        requestBody.livecrawl = contents.livecrawl;
-        requestBody.livecrawlTimeout = contents.livecrawlTimeout;
-        requestBody.subpages = contents.subpages;
-        requestBody.subpageTarget = contents.subpageTarget;
-        requestBody.extras = contents.extras;
-        requestBody.context = contents.context;
+        if (contents.text !== undefined) {
+          requestBody.text = contents.text;
+        }
+        if (contents.highlights !== undefined) {
+          requestBody.highlights = contents.highlights;
+        }
+        if (contents.summary !== undefined) {
+          requestBody.summary = contents.summary;
+        }
+        if (contents.livecrawl !== undefined) {
+          requestBody.livecrawl = contents.livecrawl;
+        }
+        if (contents.livecrawlTimeout !== undefined) {
+          requestBody.livecrawlTimeout = contents.livecrawlTimeout;
+        }
+        if (contents.subpages !== undefined) {
+          requestBody.subpages = contents.subpages;
+        }
+        if (contents.subpageTarget !== undefined) {
+          requestBody.subpageTarget = contents.subpageTarget;
+        }
+        if (contents.extras !== undefined) {
+          requestBody.extras = contents.extras;
+        }
+        if (contents.context !== undefined) {
+          requestBody.context = contents.context;
+        }
       }
 
       const raw = await Effect.runPromise(
