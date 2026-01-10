@@ -164,17 +164,31 @@ export function exaWebSearch(config: ExaWebSearchConfig = {}) {
       const contentsConfig: Record<string, unknown> = {};
 
       // Handle text content (default: get text with 3000 characters)
-      if (contents.text !== undefined) {
+      if (contents.text === false) {
+        // Explicitly disabled - don't include in request
+      } else if (contents.text === true) {
+        contentsConfig.text = { maxCharacters: 3000 };
+      } else if (contents.text !== undefined) {
         contentsConfig.text = contents.text;
       } else {
         contentsConfig.text = { maxCharacters: 3000 };
       }
 
-      // Add other content options
-      if (contents.highlights !== undefined) {
+      // Handle highlights (disabled by default)
+      if (contents.highlights === false) {
+        // Explicitly disabled - don't include in request
+      } else if (contents.highlights === true) {
+        contentsConfig.highlights = true;
+      } else if (contents.highlights !== undefined) {
         contentsConfig.highlights = contents.highlights;
       }
-      if (contents.summary !== undefined) {
+
+      // Handle summary (disabled by default)
+      if (contents.summary === false) {
+        // Explicitly disabled - don't include in request
+      } else if (contents.summary === true) {
+        contentsConfig.summary = true;
+      } else if (contents.summary !== undefined) {
         contentsConfig.summary = contents.summary;
       }
 
@@ -223,9 +237,6 @@ export function exaWebSearch(config: ExaWebSearchConfig = {}) {
   });
 }
 
-export { exaWebContents };
-
-// Re-export types for consumers
 export type {
   ExaWebSearchConfig,
   ExaApiResponse,

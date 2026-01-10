@@ -279,8 +279,11 @@ const agent = createRetrievalAgent({
         expression: z.string().describe("Math expression to evaluate"),
       }),
       execute: async ({ expression }) => {
-        // Safe evaluation logic here
-        return { result: eval(expression) };
+        // Use a safe math parser library like math.js or expr-eval
+        // Example: return { result: math.evaluate(expression) };
+        throw new Error(
+          "Calculator implementation required - do not use eval()",
+        );
       },
     }),
     dateInfo: tool({

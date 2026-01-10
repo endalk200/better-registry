@@ -17,9 +17,9 @@ const DEFAULT_DESCRIPTION =
 
 const contentsInputSchema = z.object({
   urls: z
-    .array(z.string().min(1))
-    .min(1)
-    .max(50)
+    .array(z.string().url("Must be a valid URL"))
+    .min(1, "At least one URL is required")
+    .max(50, "Maximum 50 URLs allowed")
     .describe("List of URLs to fetch content for"),
 });
 
@@ -45,15 +45,27 @@ export function exaWebContents(config: ExaContentsConfig = {}) {
       };
 
       if (contents) {
-        if (contents.text !== undefined) {
+        if (contents.text === true) {
+          requestBody.text = true;
+        } else if (typeof contents.text === "object") {
           requestBody.text = contents.text;
         }
-        if (contents.highlights !== undefined) {
+        // text === false or undefined: omit from request
+
+        if (contents.highlights === true) {
+          requestBody.highlights = true;
+        } else if (typeof contents.highlights === "object") {
           requestBody.highlights = contents.highlights;
         }
-        if (contents.summary !== undefined) {
+        // highlights === false or undefined: omit from request
+
+        if (contents.summary === true) {
+          requestBody.summary = true;
+        } else if (typeof contents.summary === "object") {
           requestBody.summary = contents.summary;
         }
+        // summary === false or undefined: omit from request
+
         if (contents.livecrawl !== undefined) {
           requestBody.livecrawl = contents.livecrawl;
         }
