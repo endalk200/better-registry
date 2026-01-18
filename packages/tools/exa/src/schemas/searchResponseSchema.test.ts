@@ -16,7 +16,9 @@ describe("ExaApiResponseSchema", () => {
     const parsed = ExaApiResponseSchema.safeParse(raw);
     expect(parsed.success).toBe(true);
     if (parsed.success) {
-      expect((parsed.data.results[0] as any)?.title).toBe("Example");
+      expect(
+        (parsed.data.results[0] as { title: string } | undefined)?.title,
+      ).toBe("Example");
     }
   });
 

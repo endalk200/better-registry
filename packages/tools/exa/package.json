@@ -1,7 +1,7 @@
 {
   "name": "@ai-registry/exa",
   "version": "0.1.0",
-  "description": "Exa tools for Vercel AI SDK agents",
+  "description": "Exa tools with SDK-agnostic core and adapters for AI SDKs",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -10,6 +10,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js"
+    },
+    "./ai-sdk": {
+      "types": "./dist/adapters/index.d.ts",
+      "import": "./dist/adapters/index.js"
     }
   },
   "files": [
@@ -22,16 +30,25 @@
     "lint": "eslint src/",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "example": "tsx",
+    "example:basic": "tsx examples/basic-search.ts",
+    "example:research": "tsx examples/research-papers.ts",
+    "example:news": "tsx examples/news-search.ts",
+    "example:contents": "tsx examples/fetch-contents.ts",
+    "example:combined": "tsx examples/combined-workflow.ts",
+    "example:core": "tsx examples/core-usage.ts"
   },
   "keywords": [
     "ai",
     "vercel-ai-sdk",
     "exa",
     "web-search",
+    "web-contents",
     "tool",
     "agent",
-    "llm"
+    "llm",
+    "sdk-agnostic"
   ],
   "author": "",
   "license": "MIT",
@@ -43,12 +60,19 @@
   "peerDependencies": {
     "ai": "^4.0.0 || ^5.0.0 || ^6.0.0"
   },
+  "peerDependenciesMeta": {
+    "ai": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@ai-registry/eslint-config": "workspace:*",
     "@ai-registry/typescript-config": "workspace:*",
+    "@ai-sdk/openai": "^3.0.12",
     "@types/node": "^22.15.0",
-    "ai": "^6.0.0",
+    "ai": "^6.0.39",
     "tsup": "^8.5.0",
+    "tsx": "^4.19.4",
     "typescript": "^5.9.2",
     "vitest": "^4.0.16"
   },
