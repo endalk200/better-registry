@@ -7,9 +7,14 @@
  *
  * ### With Vercel AI SDK
  * ```ts
- * import { exaWebSearch, exaWebContents } from "@ai-registry/exa";
+ * import { createExaWebSearchTool, createExaWebContentsTool } from "@ai-registry/exa";
  * // or explicitly:
- * import { exaWebSearch, exaWebContents } from "@ai-registry/exa/ai-sdk";
+ * import { createExaWebSearchTool, createExaWebContentsTool } from "@ai-registry/exa/ai-sdk";
+ * ```
+ *
+ * ### With TanStack AI
+ * ```ts
+ * import { createTanstackExaWebSearchTool, createTanstackExaWebContentsTool } from "@ai-registry/exa/tanstack-ai";
  * ```
  *
  * ### Core functions (SDK-agnostic)
@@ -20,8 +25,18 @@
  * ```
  */
 
-// Default export: AI SDK tools
-export { exaWebSearch, exaWebContents } from "./adapters/ai-sdk.js";
+// AI SDK tools (default export)
+export {
+  createExaWebSearchTool,
+  createExaWebContentsTool,
+  type ExaToolOptions,
+} from "./adapters/ai-sdk.js";
+
+// TanStack AI tools
+export {
+  createTanstackExaWebSearchTool,
+  createTanstackExaWebContentsTool,
+} from "./adapters/tanstack-ai.js";
 
 // Re-export all types
 export type {

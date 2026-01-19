@@ -5,14 +5,9 @@
 
 import { tool } from "ai";
 import { z } from "zod";
-import { webSearch } from "../core/webSearch.js";
-import { webContents } from "../core/webContents.js";
-import type {
-  ExaWebSearchConfig,
-  ExaContentsConfig,
-  ExaApiResponse,
-  ExaContentsResponse,
-} from "../types.js";
+import { webSearch, type WebSearchOptions } from "../core/webSearch.js";
+import { webContents, type WebContentsOptions } from "../core/webContents.js";
+import type { ExaApiResponse, ExaContentsResponse } from "../types.js";
 
 const DEFAULT_SEARCH_DESCRIPTION =
   "Search the web for current information, documentation, news, articles, and research. " +
@@ -42,15 +37,24 @@ const contentsInputSchema = z.object({
 });
 
 /**
+ * Tool-specific options for adapter factory functions.
+ */
+export interface ExaToolOptions {
+  /** Custom tool description for the LLM */
+  description?: string;
+}
+
+/**
  * Creates a web search tool powered by Exa for use with Vercel AI SDK.
  *
- * @param config - Configuration options for the Exa search
+ * @param config - Configuration options for the Exa search (core options only)
+ * @param toolOptions - Tool-specific options like custom description
  * @returns A tool that can be used with AI SDK's generateText, streamText, or agents
  *
  * @example Basic usage with environment variable
  * ```ts
  * import { generateText } from "ai";
- * import { exaWebSearch } from "@ai-registry/exa";
+ * import { createExaWebSearchTool } from "@ai-registry/exa";
  * import { openai } from "@ai-sdk/openai";
  *
  * // Set EXA_API_KEY in your environment
@@ -58,45 +62,49 @@ const contentsInputSchema = z.object({
  *   model: openai("gpt-4o-mini"),
  *   prompt: "What are the latest developments in AI?",
  *   tools: {
- *     webSearch: exaWebSearch(),
+ *     webSearch: createExaWebSearchTool(),
  *   },
  * });
  * ```
  *
  * @example With custom configuration
  * ```ts
- * import { exaWebSearch } from "@ai-registry/exa";
+ * import { createExaWebSearchTool } from "@ai-registry/exa";
  *
- * const webSearch = exaWebSearch({
- *   apiKey: "your-exa-api-key",
- *   numResults: 5,
- *   type: "neural",
- *   category: "research paper",
- *   contents: {
- *     text: { maxCharacters: 5000 },
- *     highlights: true,
- *     summary: true,
+ * const webSearch = createExaWebSearchTool(
+ *   {
+ *     apiKey: "your-exa-api-key",
+ *     numResults: 5,
+ *     type: "neural",
+ *     category: "research paper",
+ *     contents: {
+ *       text: { maxCharacters: 5000 },
+ *       highlights: true,
+ *       summary: true,
+ *     },
  *   },
- * });
+ *   { description: "Search academic papers and research" }
+ * );
  * ```
  *
  * @example Domain filtering
  * ```ts
- * const technicalSearch = exaWebSearch({
+ * const technicalSearch = createExaWebSearchTool({
  *   includeDomains: ["github.com", "stackoverflow.com", "docs.python.org"],
  *   excludeDomains: ["pinterest.com"],
  *   type: "keyword",
  * });
  * ```
  */
-export function exaWebSearch(config: ExaWebSearchConfig = {}) {
-  const { toolDescription, ...searchOptions } = config;
-
+export function createExaWebSearchTool(
+  config: WebSearchOptions = {},
+  toolOptions: ExaToolOptions = {},
+) {
   return tool({
-    description: toolDescription ?? DEFAULT_SEARCH_DESCRIPTION,
+    description: toolOptions.description ?? DEFAULT_SEARCH_DESCRIPTION,
     inputSchema: webSearchInputSchema,
     execute: async ({ query }): Promise<ExaApiResponse> => {
-      return webSearch({ query }, searchOptions);
+      return webSearch({ query }, config);
     },
   });
 }
@@ -104,47 +112,52 @@ export function exaWebSearch(config: ExaWebSearchConfig = {}) {
 /**
  * Creates a web contents tool powered by Exa for use with Vercel AI SDK.
  *
- * @param config - Configuration options for fetching contents
+ * @param config - Configuration options for fetching contents (core options only)
+ * @param toolOptions - Tool-specific options like custom description
  * @returns A tool that can be used with AI SDK's generateText, streamText, or agents
  *
  * @example Basic usage
  * ```ts
  * import { generateText } from "ai";
- * import { exaWebContents } from "@ai-registry/exa";
+ * import { createExaWebContentsTool } from "@ai-registry/exa";
  * import { openai } from "@ai-sdk/openai";
  *
  * const { text } = await generateText({
  *   model: openai("gpt-4o-mini"),
  *   prompt: "Summarize this article: https://example.com/article",
  *   tools: {
- *     webContents: exaWebContents(),
+ *     webContents: createExaWebContentsTool(),
  *   },
  * });
  * ```
  *
  * @example With custom configuration
  * ```ts
- * const webContents = exaWebContents({
- *   apiKey: "your-exa-api-key",
- *   contents: {
- *     text: { maxCharacters: 10000 },
- *     summary: true,
- *     livecrawl: "always",
+ * const webContents = createExaWebContentsTool(
+ *   {
+ *     apiKey: "your-exa-api-key",
+ *     contents: {
+ *       text: { maxCharacters: 10000 },
+ *       summary: true,
+ *       livecrawl: "always",
+ *     },
  *   },
- * });
+ *   { description: "Fetch and analyze web page content" }
+ * );
  * ```
  */
-export function exaWebContents(config: ExaContentsConfig = {}) {
-  const { toolDescription, ...contentsOptions } = config;
-
+export function createExaWebContentsTool(
+  config: WebContentsOptions = {},
+  toolOptions: ExaToolOptions = {},
+) {
   return tool({
-    description: toolDescription ?? DEFAULT_CONTENTS_DESCRIPTION,
+    description: toolOptions.description ?? DEFAULT_CONTENTS_DESCRIPTION,
     inputSchema: contentsInputSchema,
     execute: async ({ urls }): Promise<ExaContentsResponse> => {
-      return webContents({ urls }, contentsOptions);
+      return webContents({ urls }, config);
     },
   });
 }
 
 // Re-export config types for convenience
-export type { ExaWebSearchConfig, ExaContentsConfig };
+export type { WebSearchOptions, WebContentsOptions };
