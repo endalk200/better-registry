@@ -202,12 +202,6 @@ export interface ExaWebSearchConfig {
    * Contents options - what to retrieve from each result
    */
   contents?: ContentsOptions;
-
-  /**
-   * Custom tool description for the LLM
-   * Defaults to a comprehensive description of web search capabilities
-   */
-  toolDescription?: string;
 }
 
 /**
@@ -283,11 +277,6 @@ export interface ExaContentsConfig {
    * Controls what content to retrieve from each URL.
    */
   contents?: ContentsOptions;
-
-  /**
-   * Custom tool description for the LLM.
-   */
-  toolDescription?: string;
 }
 
 export interface ExaContentsRequest {
