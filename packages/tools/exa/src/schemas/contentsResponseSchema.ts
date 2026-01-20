@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ExaSearchResultSchema } from "./searchResponseSchema.js";
 
-const ExaContentsStatusSchema = z.object({
+export const ExaContentsStatusSchema = z.object({
   id: z.string(),
   status: z.enum(["success", "error"]),
   error: z
@@ -28,8 +28,8 @@ export const ExaContentsResponseSchema = z.object({
     .object({
       total: z.number().optional(),
       breakDown: z.unknown().optional(),
-      perRequestPrices: z.record(z.number()).optional(),
-      perPagePrices: z.record(z.number()).optional(),
+      perRequestPrices: z.record(z.string(), z.number()).optional(),
+      perPagePrices: z.record(z.string(), z.number()).optional(),
     })
     .optional(),
 });

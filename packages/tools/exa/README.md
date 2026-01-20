@@ -44,7 +44,10 @@ Get your API key at [dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-key
 
 ```typescript
 import { generateText } from "ai";
-import { exaWebSearch, exaWebContents } from "@ai-registry/exa";
+import {
+  createExaWebSearchTool,
+  createExaWebContentsTool,
+} from "@ai-registry/exa";
 import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
@@ -52,8 +55,8 @@ const { text } = await generateText({
   prompt:
     "Find the official docs for Effect HttpClient, then fetch the page text.",
   tools: {
-    webSearch: exaWebSearch({ numResults: 3 }),
-    webContents: exaWebContents({
+    webSearch: createExaWebSearchTool({ numResults: 3 }),
+    webContents: createExaWebContentsTool({
       contents: { text: { maxCharacters: 6000 }, summary: true },
     }),
   },
@@ -64,14 +67,14 @@ const { text } = await generateText({
 
 ```typescript
 import { generateText } from "ai";
-import { exaWebSearch } from "@ai-registry/exa";
+import { createExaWebSearchTool } from "@ai-registry/exa";
 import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
   model: openai("gpt-4o-mini"),
   prompt: "What are the latest developments in AI?",
   tools: {
-    webSearch: exaWebSearch(),
+    webSearch: createExaWebSearchTool(),
   },
 });
 ```
@@ -80,7 +83,7 @@ const { text } = await generateText({
 
 ```typescript
 import { ToolLoopAgent } from "ai";
-import { exaWebSearch } from "@ai-registry/exa";
+import { createExaWebSearchTool } from "@ai-registry/exa";
 import { openai } from "@ai-sdk/openai";
 
 const researchAgent = new ToolLoopAgent({
@@ -91,7 +94,7 @@ const researchAgent = new ToolLoopAgent({
     2. Cross-reference multiple sources
     3. Cite your sources when presenting information`,
   tools: {
-    webSearch: exaWebSearch({ numResults: 10 }),
+    webSearch: createExaWebSearchTool({ numResults: 10 }),
   },
 });
 
@@ -105,9 +108,9 @@ const result = await researchAgent.generate({
 ### Full Configuration Options
 
 ```typescript
-import { exaWebSearch } from "@ai-registry/exa";
+import { createExaWebSearchTool } from "@ai-registry/exa";
 
-const webSearch = exaWebSearch({
+const webSearch = createExaWebSearchTool({
   // API Configuration
   apiKey: "your-exa-api-key", // Defaults to process.env.EXA_API_KEY
 
@@ -186,15 +189,15 @@ const webSearch = exaWebSearch({
 
 This package exports two AI SDK tools:
 
-- `exaWebSearch()` calls Exa `POST /search`.
-- `exaWebContents()` calls Exa `POST /contents` to fetch full text/summaries for known URLs.
+- `createExaWebSearchTool()` calls Exa `POST /search`.
+- `createExaWebContentsTool()` calls Exa `POST /contents` to fetch full text/summaries for known URLs.
 
 ## Examples
 
 ### Research Papers Search
 
 ```typescript
-const academicSearch = exaWebSearch({
+const academicSearch = createExaWebSearchTool({
   category: "research paper",
   includeDomains: [
     "arxiv.org",
@@ -214,7 +217,7 @@ const academicSearch = exaWebSearch({
 ### News Search
 
 ```typescript
-const newsSearch = exaWebSearch({
+const newsSearch = createExaWebSearchTool({
   category: "news",
   startPublishedDate: new Date(
     Date.now() - 7 * 24 * 60 * 60 * 1000,
@@ -231,7 +234,7 @@ const newsSearch = exaWebSearch({
 ### Technical Documentation Search
 
 ```typescript
-const docsSearch = exaWebSearch({
+const docsSearch = createExaWebSearchTool({
   includeDomains: [
     "docs.python.org",
     "developer.mozilla.org",
@@ -249,7 +252,7 @@ const docsSearch = exaWebSearch({
 ### GitHub Code Search
 
 ```typescript
-const codeSearch = exaWebSearch({
+const codeSearch = createExaWebSearchTool({
   category: "github",
   includeDomains: ["github.com"],
   type: "neural",
