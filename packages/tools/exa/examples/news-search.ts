@@ -11,18 +11,10 @@
  * Prerequisites:
  * - Set EXA_API_KEY environment variable
  * - Set OPENAI_API_KEY environment variable
- *
- * Install dependencies:
- *   npm install @ai-registry/exa ai @ai-sdk/openai
- *
- * Run:
- *   npx tsx examples/news-search.ts
  */
 
-import { generateText } from "ai";
+import { generateText, stepCountIs } from "ai";
 import { openai } from "@ai-sdk/openai";
-// When running locally: imports from built dist/
-// When copying to your project: change to "@ai-registry/exa"
 import { createExaWebSearchTool } from "../dist/index.js";
 
 async function main() {
@@ -56,7 +48,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Major tech news this week");
@@ -88,7 +80,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Breaking AI industry news");
@@ -125,7 +117,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Climate change policy developments");
@@ -169,7 +161,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Stock market and financial news");
@@ -205,7 +197,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Renewable energy developments (filtered sources)");
@@ -235,7 +227,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: European tech startup news");
