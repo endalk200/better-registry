@@ -10,15 +10,6 @@
  *
  * The core functions provide the same functionality as the AI SDK tools
  * but return raw results that you can process however you need.
- *
- * Prerequisites:
- * - Set EXA_API_KEY environment variable
- *
- * Install dependencies:
- *   npm install @ai-registry/exa
- *
- * Run:
- *   npx tsx examples/core-usage.ts
  */
 
 // Import from the /core subpath for SDK-agnostic functions

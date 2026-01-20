@@ -15,15 +15,9 @@
  * Prerequisites:
  * - Set EXA_API_KEY environment variable
  * - Set OPENAI_API_KEY environment variable
- *
- * Install dependencies:
- *   npm install @ai-registry/exa ai @ai-sdk/openai
- *
- * Run:
- *   npx tsx examples/combined-workflow.ts
  */
 
-import { generateText } from "ai";
+import { generateText, stepCountIs } from "ai";
 import { openai } from "@ai-sdk/openai";
 // When running locally: imports from built dist/
 // When copying to your project: change to "@ai-registry/exa"
@@ -64,8 +58,7 @@ async function main() {
         },
       }),
     },
-    // Allow multiple steps for the research workflow
-    maxSteps: 5,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: WebAssembly research workflow");
@@ -98,7 +91,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 5,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Next.js authentication documentation analysis");
@@ -135,7 +128,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 6,
+    stopWhen: stepCountIs(6),
   });
 
   console.log("Task: Vector database comparison");
@@ -175,7 +168,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 5,
+    stopWhen: stepCountIs(5),
   });
 
   console.log("Task: Quantum computing news with verification");
@@ -218,7 +211,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 6,
+    stopWhen: stepCountIs(6),
   });
 
   console.log("Task: Turborepo monorepo tutorial");
@@ -254,7 +247,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 4,
+    stopWhen: stepCountIs(4),
   });
 
   console.log("Task: GitHub API exploration");
@@ -288,7 +281,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 5,
+    stopWhen: stepCountIs(5),
   });
 
   console.log("Task: Rust web development research");

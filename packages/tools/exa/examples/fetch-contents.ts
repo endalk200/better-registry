@@ -16,19 +16,9 @@
  * Use exaWebSearch when:
  * - You need to discover URLs by searching
  * - You want to find relevant content on a topic
- *
- * Prerequisites:
- * - Set EXA_API_KEY environment variable
- * - Set OPENAI_API_KEY environment variable
- *
- * Install dependencies:
- *   npm install @ai-registry/exa ai @ai-sdk/openai
- *
- * Run:
- *   npx tsx examples/fetch-contents.ts
  */
 
-import { generateText } from "ai";
+import { generateText, stepCountIs } from "ai";
 import { openai } from "@ai-sdk/openai";
 // When running locally: imports from built dist/
 // When copying to your project: change to "@ai-registry/exa"
@@ -48,7 +38,7 @@ async function main() {
       // createExaWebContentsTool fetches content from URLs the model provides
       webContents: createExaWebContentsTool(),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Summarize Vercel AI SDK docs");
@@ -71,7 +61,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Analyze OpenAI research page");
@@ -95,7 +85,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Compare React and Vue documentation");
@@ -121,7 +111,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Check OpenAI status page");
@@ -150,7 +140,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Extract key features from Anthropic Claude page");
@@ -177,7 +167,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Analyze Stripe pricing with subpages");
@@ -204,7 +194,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Analyze Vercel AI SDK GitHub repo");
@@ -239,7 +229,7 @@ async function main() {
         },
       ),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Task: Explain Exa API documentation");

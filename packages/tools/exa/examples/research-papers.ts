@@ -11,18 +11,10 @@
  * Prerequisites:
  * - Set EXA_API_KEY environment variable
  * - Set OPENAI_API_KEY environment variable
- *
- * Install dependencies:
- *   npm install @ai-registry/exa ai @ai-sdk/openai
- *
- * Run:
- *   npx tsx examples/research-papers.ts
  */
 
-import { generateText } from "ai";
+import { generateText, stepCountIs } from "ai";
 import { openai } from "@ai-sdk/openai";
-// When running locally: imports from built dist/
-// When copying to your project: change to "@ai-registry/exa"
 import { createExaWebSearchTool } from "../dist/index.js";
 
 async function main() {
@@ -55,7 +47,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Latest research on transformer architectures");
@@ -88,7 +80,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Papers on LLM alignment techniques");
@@ -119,7 +111,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: Recent advances in multimodal AI (last 6 months)");
@@ -159,7 +151,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 3,
+    stopWhen: stepCountIs(3),
   });
 
   console.log("Question: CRISPR breakthroughs for genetic diseases");
@@ -196,7 +188,7 @@ async function main() {
         },
       }),
     },
-    maxSteps: 5,
+    stopWhen: stepCountIs(5),
   });
 
   console.log("Question: Comprehensive overview of AI safety research");
