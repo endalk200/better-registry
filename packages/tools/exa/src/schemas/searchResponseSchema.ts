@@ -34,8 +34,8 @@ export const ExaApiResponseSchema = z.object({
     .object({
       total: z.number().optional(),
       breakDown: z.unknown().optional(),
-      perRequestPrices: z.record(z.number()).optional(),
-      perPagePrices: z.record(z.number()).optional(),
+      perRequestPrices: z.record(z.string(), z.number()).optional(),
+      perPagePrices: z.record(z.string(), z.number()).optional(),
     })
     .optional(),
 });

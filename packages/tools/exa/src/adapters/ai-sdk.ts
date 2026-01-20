@@ -1,22 +1,15 @@
-/**
- * Vercel AI SDK adapter for Exa tools.
- * Wraps the core SDK-agnostic implementations as AI SDK tools.
- */
-
 import { tool } from "ai";
 import { z } from "zod";
 import { webSearch, type WebSearchOptions } from "../core/webSearch.js";
 import { webContents, type WebContentsOptions } from "../core/webContents.js";
 import type { ExaApiResponse, ExaContentsResponse } from "../types.js";
 
+import type { ExaToolOptions } from "./types.js";
+
 const DEFAULT_SEARCH_DESCRIPTION =
   "Search the web for current information, documentation, news, articles, and research. " +
   "Use this when you need up-to-date information, facts from the internet, or to find specific content. " +
   "Performs real-time web searches with optional content scraping.";
-
-const DEFAULT_CONTENTS_DESCRIPTION =
-  "Fetch full page contents, summaries, and metadata for a list of URLs using Exa. " +
-  "Use this when you already have URLs and want to retrieve their text or summaries.";
 
 const webSearchInputSchema = z.object({
   query: z
@@ -27,22 +20,6 @@ const webSearchInputSchema = z.object({
       "The web search query - be specific and clear about what you're looking for",
     ),
 });
-
-const contentsInputSchema = z.object({
-  urls: z
-    .array(z.string().url("Must be a valid URL"))
-    .min(1, "At least one URL is required")
-    .max(50, "Maximum 50 URLs allowed")
-    .describe("List of URLs to fetch content for"),
-});
-
-/**
- * Tool-specific options for adapter factory functions.
- */
-export interface ExaToolOptions {
-  /** Custom tool description for the LLM */
-  description?: string;
-}
 
 /**
  * Creates a web search tool powered by Exa for use with Vercel AI SDK.
@@ -109,6 +86,18 @@ export function createExaWebSearchTool(
   });
 }
 
+const contentsInputSchema = z.object({
+  urls: z
+    .array(z.string().url("Must be a valid URL"))
+    .min(1, "At least one URL is required")
+    .max(50, "Maximum 50 URLs allowed")
+    .describe("List of URLs to fetch content for"),
+});
+
+const DEFAULT_CONTENTS_DESCRIPTION =
+  "Fetch full page contents, summaries, and metadata for a list of URLs using Exa. " +
+  "Use this when you already have URLs and want to retrieve their text or summaries.";
+
 /**
  * Creates a web contents tool powered by Exa for use with Vercel AI SDK.
  *
@@ -159,5 +148,4 @@ export function createExaWebContentsTool(
   });
 }
 
-// Re-export config types for convenience
-export type { WebSearchOptions, WebContentsOptions };
+export type { WebSearchOptions, WebContentsOptions, ExaToolOptions };

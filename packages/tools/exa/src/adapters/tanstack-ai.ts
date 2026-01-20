@@ -1,26 +1,11 @@
-/**
- * TanStack AI adapter for Exa tools.
- * Wraps the core SDK-agnostic implementations as TanStack AI tools.
- */
-
 import { toolDefinition } from "@tanstack/ai";
 import { z } from "zod";
 import { webSearch, type WebSearchOptions } from "../core/webSearch.js";
 import { webContents, type WebContentsOptions } from "../core/webContents.js";
+import { ExaApiResponseSchema } from "../schemas/searchResponseSchema.js";
+import { ExaContentsResponseSchema } from "../schemas/contentsResponseSchema.js";
+import type { ExaToolOptions } from "./types.js";
 
-const TOOL_NAME_SEARCH = "exa_web_search";
-const TOOL_NAME_CONTENTS = "exa_web_contents";
-
-const DEFAULT_SEARCH_DESCRIPTION =
-  "Search the web for current information, documentation, news, articles, and research. " +
-  "Use this when you need up-to-date information, facts from the internet, or to find specific content. " +
-  "Performs real-time web searches with optional content scraping.";
-
-const DEFAULT_CONTENTS_DESCRIPTION =
-  "Fetch full page contents, summaries, and metadata for a list of URLs using Exa. " +
-  "Use this when you already have URLs and want to retrieve their text or summaries.";
-
-// Input schemas
 const webSearchInputSchema = z.object({
   query: z
     .string()
@@ -31,6 +16,22 @@ const webSearchInputSchema = z.object({
     ),
 });
 
+const DEFAULT_SEARCH_DESCRIPTION =
+  "Search the web for current information, documentation, news, articles, and research. " +
+  "Use this when you need up-to-date information, facts from the internet, or to find specific content. " +
+  "Performs real-time web searches with optional content scraping.";
+
+const webSearchToolDef = toolDefinition({
+  name: "exa_web_search",
+  description: DEFAULT_SEARCH_DESCRIPTION,
+  inputSchema: webSearchInputSchema,
+  outputSchema: ExaApiResponseSchema,
+});
+
+const DEFAULT_CONTENTS_DESCRIPTION =
+  "Fetch full page contents, summaries, and metadata for a list of URLs using Exa. " +
+  "Use this when you already have URLs and want to retrieve their text or summaries.";
+
 const contentsInputSchema = z.object({
   urls: z
     .array(z.string().url("Must be a valid URL"))
@@ -39,94 +40,12 @@ const contentsInputSchema = z.object({
     .describe("List of URLs to fetch content for"),
 });
 
-// Output schemas matching ExaApiResponse and ExaContentsResponse
-const extrasSchema = z
-  .object({
-    links: z.array(z.string()).optional(),
-    imageLinks: z.array(z.string()).optional(),
-  })
-  .optional();
-
-const exaSearchResultSchema = z.object({
-  title: z.string(),
-  url: z.string(),
-  id: z.string().optional(),
-  publishedDate: z.string().optional(),
-  author: z.string().optional(),
-  image: z.string().optional(),
-  favicon: z.string().optional(),
-  text: z.string().optional(),
-  highlights: z.array(z.string()).optional(),
-  highlightScores: z.array(z.number()).optional(),
-  summary: z.string().optional(),
-  extras: extrasSchema,
-});
-
-const costDollarsSchema = z
-  .object({
-    total: z.number().optional(),
-    breakDown: z.unknown().optional(),
-    perRequestPrices: z.record(z.string(), z.number()).optional(),
-    perPagePrices: z.record(z.string(), z.number()).optional(),
-  })
-  .optional();
-
-const webSearchOutputSchema = z.object({
-  requestId: z.string().optional(),
-  searchType: z.enum(["neural", "deep"]).optional(),
-  context: z.string().optional(),
-  results: z.array(exaSearchResultSchema),
-  costDollars: costDollarsSchema,
-});
-
-const contentsStatusSchema = z.object({
-  id: z.string(),
-  status: z.enum(["success", "error"]),
-  error: z
-    .object({
-      tag: z.enum([
-        "CRAWL_NOT_FOUND",
-        "CRAWL_TIMEOUT",
-        "CRAWL_LIVECRAWL_TIMEOUT",
-        "SOURCE_NOT_AVAILABLE",
-        "CRAWL_UNKNOWN_ERROR",
-      ]),
-      httpStatusCode: z.number().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
-});
-
-const webContentsOutputSchema = z.object({
-  requestId: z.string().optional(),
-  results: z.array(exaSearchResultSchema),
-  context: z.string().optional(),
-  statuses: z.array(contentsStatusSchema).optional(),
-  costDollars: costDollarsSchema,
-});
-
-// Tool definitions
-const webSearchToolDef = toolDefinition({
-  name: TOOL_NAME_SEARCH,
-  description: DEFAULT_SEARCH_DESCRIPTION,
-  inputSchema: webSearchInputSchema,
-  outputSchema: webSearchOutputSchema,
-});
-
 const webContentsToolDef = toolDefinition({
-  name: TOOL_NAME_CONTENTS,
+  name: "exa_web_contents",
   description: DEFAULT_CONTENTS_DESCRIPTION,
   inputSchema: contentsInputSchema,
-  outputSchema: webContentsOutputSchema,
+  outputSchema: ExaContentsResponseSchema,
 });
-
-/**
- * Tool-specific options for adapter factory functions.
- */
-export interface ExaToolOptions {
-  /** Custom tool description for the LLM */
-  description?: string;
-}
 
 /**
  * Creates a web search tool powered by Exa for use with TanStack AI.
@@ -180,10 +99,10 @@ export function createTanstackExaWebSearchTool(
   // Create tool definition with custom description if provided
   const def = toolOptions.description
     ? toolDefinition({
-        name: TOOL_NAME_SEARCH,
+        name: "exa_web_search",
         description: toolOptions.description,
         inputSchema: webSearchInputSchema,
-        outputSchema: webSearchOutputSchema,
+        outputSchema: ExaApiResponseSchema,
       })
     : webSearchToolDef;
 
@@ -241,10 +160,10 @@ export function createTanstackExaWebContentsTool(
   // Create tool definition with custom description if provided
   const def = toolOptions.description
     ? toolDefinition({
-        name: TOOL_NAME_CONTENTS,
+        name: "exa_web_contents",
         description: toolOptions.description,
         inputSchema: contentsInputSchema,
-        outputSchema: webContentsOutputSchema,
+        outputSchema: ExaContentsResponseSchema,
       })
     : webContentsToolDef;
 
@@ -254,5 +173,4 @@ export function createTanstackExaWebContentsTool(
   });
 }
 
-// Re-export config types for convenience
-export type { WebSearchOptions, WebContentsOptions };
+export type { WebSearchOptions, WebContentsOptions, ExaToolOptions };
