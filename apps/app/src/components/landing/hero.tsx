@@ -182,6 +182,15 @@ export function Hero() {
               >
                 Read the Docs
               </BrutalButton>
+
+              <BrutalButton
+                variant="secondary"
+                size="md"
+                href="/playground"
+                icon={<Sparkles className="w-4 h-4" />}
+              >
+                Try Playground
+              </BrutalButton>
             </motion.div>
 
             {/* Micro social proof */}

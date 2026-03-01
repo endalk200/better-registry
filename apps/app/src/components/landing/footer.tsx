@@ -40,6 +40,12 @@ export function Footer() {
                 </span>
               </a>
               <a
+                href="/playground"
+                className="text-sm text-gray-600 hover:text-black transition-colors"
+              >
+                Playground
+              </a>
+              <a
                 href="#"
                 className="text-sm text-gray-600 hover:text-black transition-colors"
               >
