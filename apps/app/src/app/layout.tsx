@@ -12,26 +12,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://better-registry.vercel.app");
+
+const title =
+  "better-registry — The shadcn for AI | Open-Source AI Tools";
+const description =
+  "Open-source, SDK-agnostic AI tools and agents for Vercel AI SDK & TanStack AI. Install with one command, own the source code, and ship AI features faster.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://better-registry.com",
-  ),
-  title: "better-registry — The shadcn for AI",
-  description:
-    "Open-source, SDK-agnostic AI tools and agents. Install with one command, own the source code.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
   openGraph: {
-    title: "better-registry — The shadcn for AI",
-    description:
-      "Open-source, SDK-agnostic AI tools and agents. Install with one command, own the source code.",
+    title,
+    description,
+    url: siteUrl,
     type: "website",
     siteName: "better-registry",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "better-registry — The shadcn for AI",
-    description:
-      "Open-source, SDK-agnostic AI tools and agents. Install with one command, own the source code.",
+    title,
+    description,
   },
 };
 
