@@ -25,31 +25,28 @@ export function Footer() {
             </h3>
             <div className="flex flex-col gap-2">
               <a
-                href="#tools"
+                href="/registry"
+                className="text-sm text-gray-600 hover:text-black transition-colors"
+              >
+                Registry
+              </a>
+              <a
+                href="/registry?type=tool"
                 className="text-sm text-gray-600 hover:text-black transition-colors"
               >
                 Tools
               </a>
               <a
-                href="#"
+                href="/registry?type=agent"
                 className="text-sm text-gray-600 hover:text-black transition-colors"
               >
                 Agents
-                <span className="text-[10px] font-mono bg-gray-100 text-gray-500 px-1.5 py-0.5 ml-2 border border-gray-200">
-                  SOON
-                </span>
               </a>
               <a
                 href="/playground"
                 className="text-sm text-gray-600 hover:text-black transition-colors"
               >
                 Playground
-              </a>
-              <a
-                href="#"
-                className="text-sm text-gray-600 hover:text-black transition-colors"
-              >
-                Documentation
               </a>
               <a
                 href="#"

@@ -10,10 +10,10 @@ import {
 import { BrutalButton } from "@/components/ui/brutal-button";
 
 const navLinks = [
-  { label: "Tools", href: "#tools" },
-  { label: "Agents", href: "#agents" },
+  { label: "Registry", href: "/registry" },
+  { label: "Tools", href: "/registry?type=tool" },
+  { label: "Agents", href: "/registry?type=agent" },
   { label: "Playground", href: "/playground" },
-  { label: "Docs", href: "#docs" },
   { label: "GitHub", href: "https://github.com" },
 ];
 
