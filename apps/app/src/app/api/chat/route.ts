@@ -7,9 +7,7 @@ import {
   CHAT_LIMITS,
   chatRequestSchema,
 } from "@/lib/playground/chat-contract";
-import {
-  enforceChatAccess,
-} from "@/lib/playground/chat-security";
+import { enforceChatAccess } from "@/lib/playground/chat-security";
 
 export const maxDuration = 60;
 
@@ -18,7 +16,7 @@ const LOG_PREFIX = "[playground-chat]";
 const createErrorResponse = (
   status: number,
   code: ChatErrorCode,
-  message: string
+  message: string,
 ) =>
   Response.json(
     {
@@ -27,7 +25,7 @@ const createErrorResponse = (
         message,
       },
     },
-    { status }
+    { status },
   );
 
 const isProviderConfigured = (provider: "openai" | "openrouter"): boolean => {
@@ -43,16 +41,22 @@ export async function POST(req: Request) {
     return createErrorResponse(
       accessGuard.error.status,
       accessGuard.error.code,
-      accessGuard.error.message
+      accessGuard.error.message,
     );
   }
 
-  const contentLength = Number.parseInt(req.headers.get("content-length") ?? "", 10);
-  if (!Number.isNaN(contentLength) && contentLength > CHAT_LIMITS.maxPayloadBytes) {
+  const contentLength = Number.parseInt(
+    req.headers.get("content-length") ?? "",
+    10,
+  );
+  if (
+    !Number.isNaN(contentLength) &&
+    contentLength > CHAT_LIMITS.maxPayloadBytes
+  ) {
     return createErrorResponse(
       413,
       "request_too_large",
-      "Request payload exceeds allowed size."
+      "Request payload exceeds allowed size.",
     );
   }
 
@@ -60,7 +64,11 @@ export async function POST(req: Request) {
   try {
     rawBody = await req.text();
   } catch {
-    return createErrorResponse(400, "invalid_json", "Unable to read request body.");
+    return createErrorResponse(
+      400,
+      "invalid_json",
+      "Unable to read request body.",
+    );
   }
 
   const payloadSize = new TextEncoder().encode(rawBody).length;
@@ -68,7 +76,7 @@ export async function POST(req: Request) {
     return createErrorResponse(
       413,
       "request_too_large",
-      "Request payload exceeds allowed size."
+      "Request payload exceeds allowed size.",
     );
   }
 
@@ -76,12 +84,20 @@ export async function POST(req: Request) {
   try {
     body = JSON.parse(rawBody);
   } catch {
-    return createErrorResponse(400, "invalid_json", "Request body must be valid JSON.");
+    return createErrorResponse(
+      400,
+      "invalid_json",
+      "Request body must be valid JSON.",
+    );
   }
 
   const parsed = chatRequestSchema.safeParse(body);
   if (!parsed.success) {
-    return createErrorResponse(400, "invalid_request", "Request body is invalid.");
+    return createErrorResponse(
+      400,
+      "invalid_request",
+      "Request body is invalid.",
+    );
   }
 
   const { messages, model, provider } = parsed.data as {
@@ -94,7 +110,7 @@ export async function POST(req: Request) {
     return createErrorResponse(
       503,
       "provider_not_configured",
-      `Provider "${provider}" is not configured on the server.`
+      `Provider "${provider}" is not configured on the server.`,
     );
   }
 
@@ -147,7 +163,7 @@ export async function POST(req: Request) {
     return createErrorResponse(
       500,
       "unknown",
-      "Unable to process chat request right now."
+      "Unable to process chat request right now.",
     );
   }
 }
