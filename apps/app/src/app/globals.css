@@ -35,6 +35,10 @@
   --accent-light: #D4FF4D;
   --hot: #FF3D00;
   --hot-light: #FF6B3D;
+  --scrollbar-track: var(--background);
+  --scrollbar-track-border: var(--border);
+  --scrollbar-thumb: var(--foreground);
+  --scrollbar-thumb-hover: var(--accent);
 }
 
 .dark {
@@ -67,6 +71,10 @@
   --accent-light: #D4FF4D;
   --hot: #FF3D00;
   --hot-light: #FF6B3D;
+  --scrollbar-track: var(--background);
+  --scrollbar-track-border: var(--border);
+  --scrollbar-thumb: var(--foreground);
+  --scrollbar-thumb-hover: var(--accent);
 }
 
 @theme inline {
@@ -211,14 +219,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-left: 3px solid #000000;
+  background: var(--scrollbar-track);
+  border-left: 1px solid var(--scrollbar-track-border);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000000;
+  background: var(--scrollbar-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
+  background: var(--scrollbar-thumb-hover);
 }
