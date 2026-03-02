@@ -1,52 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Layers, Code, Terminal, Shield, Puzzle, Zap } from "lucide-react";
 import { BrutalCard } from "@/components/ui/brutal-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { landingFeatures } from "@/lib/landing/content";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
-
-const features = [
-  {
-    icon: Layers,
-    iconBg: "bg-accent",
-    title: "SDK-Agnostic Architecture",
-    body: "Pure logic core with adapter layers. Write tools once, use them with Vercel AI SDK, TanStack AI, or any future framework. No lock-in, ever.",
-    large: true,
-    tilt: -1 as const,
-  },
-  {
-    icon: Code,
-    iconBg: "bg-gray-50",
-    title: "You Own the Code",
-    body: "Like shadcn, tools are copied into your project. Read it, modify it, extend it. No black boxes, no hidden API calls.",
-  },
-  {
-    icon: Terminal,
-    iconBg: "bg-gray-50",
-    title: "One Command Install",
-    body: "npx better-registry add [tool]. That's it. No config files, no build steps, no dependency hell.",
-  },
-  {
-    icon: Shield,
-    iconBg: "bg-gray-50",
-    title: "Fully Type-Safe",
-    body: "Zod schemas, TypeScript-first. Every tool input and output is validated and typed. Your IDE knows everything.",
-  },
-  {
-    icon: Puzzle,
-    iconBg: "bg-gray-50",
-    title: "Composable & Extensible",
-    body: "Tools are modular building blocks. Compose them into agents, chain them together, or use them standalone.",
-  },
-  {
-    icon: Zap,
-    iconBg: "bg-accent",
-    title: "Battle-Tested",
-    body: "Error handling, timeouts, retries, input validation. Production-grade from day one. Built with Effect for robust error handling.",
-    tilt: 1 as const,
-  },
-];
 
 export function FeaturesGrid() {
   return (
@@ -66,7 +24,7 @@ export function FeaturesGrid() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
-          {features.map((feature) => {
+          {landingFeatures.map((feature) => {
             const Icon = feature.icon;
 
             return (

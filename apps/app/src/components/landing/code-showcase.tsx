@@ -1,73 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCodeShowcaseTab } from "@/app/landing/hooks/use-code-showcase-tab";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CodeBlock } from "@/components/ui/code-block";
+import {
+  landingCodeShowcaseDescriptions,
+  landingCodeShowcaseSnippets,
+  landingCodeShowcaseTabs,
+} from "@/lib/landing/content";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 
-type Tab = "core" | "ai-sdk" | "tanstack";
-
-const tabs: { id: Tab; label: string }[] = [
-  { id: "core", label: "Core" },
-  { id: "ai-sdk", label: "AI SDK" },
-  { id: "tanstack", label: "TanStack" },
-];
-
-const descriptions: Record<Tab, string> = {
-  core: "Start with the core. Zero dependencies, zero framework opinions. Just a typed async function that calls Exa's API. Use it in any JavaScript runtime — Node, Deno, Bun, edge functions.",
-  "ai-sdk":
-    "Drop it into generateText or streamText. The adapter wraps the core function with Zod schemas and tool() from the AI SDK. Fully compatible with agents, tool loops, and streaming.",
-  tanstack:
-    "First-class TanStack AI support. Uses toolDefinition() with full input/output Zod schemas. Works with chat(), streaming, and TanStack's server tool pattern.",
-};
-
-const codeSnippets: Record<Tab, { code: string; filename: string }> = {
-  core: {
-    filename: "core.ts",
-    code: `import { webSearch } from "@ai-registry/exa/core";
-
-const results = await webSearch(
-  { query: "latest AI research" },
-  { numResults: 5, type: "neural" }
-);
-
-console.log(results.results[0].title);`,
-  },
-  "ai-sdk": {
-    filename: "ai-sdk.ts",
-    code: `import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { createExaWebSearchTool } from "@ai-registry/exa";
-
-const { text } = await generateText({
-  model: openai("gpt-4o-mini"),
-  prompt: "What are the latest developments in AI?",
-  tools: {
-    webSearch: createExaWebSearchTool(),
-  },
-});`,
-  },
-  tanstack: {
-    filename: "tanstack-ai.ts",
-    code: `import { chat } from "@tanstack/ai";
-import { openaiText } from "@tanstack/ai-openai";
-import {
-  createTanstackExaWebSearchTool
-} from "@ai-registry/exa/tanstack-ai";
-
-const searchTool = createTanstackExaWebSearchTool();
-
-const result = chat({
-  adapter: openaiText("gpt-4o-mini"),
-  messages: [{ role: "user", content: "Latest AI news?" }],
-  tools: [searchTool],
-});`,
-  },
-};
-
 export function CodeShowcase() {
-  const [activeTab, setActiveTab] = useState<Tab>("core");
+  const { activeTab, setActiveTab } = useCodeShowcaseTab();
 
   return (
     <section className="bg-white py-16 sm:py-24">
@@ -88,7 +33,7 @@ export function CodeShowcase() {
         >
           <motion.div variants={fadeInUp}>
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
-              {tabs.map((tab) => (
+              {landingCodeShowcaseTabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
@@ -112,7 +57,7 @@ export function CodeShowcase() {
                 transition={{ duration: 0.2 }}
                 className="text-sm sm:text-base text-gray-600 leading-relaxed"
               >
-                {descriptions[activeTab]}
+                {landingCodeShowcaseDescriptions[activeTab]}
               </motion.p>
             </AnimatePresence>
           </motion.div>
@@ -127,8 +72,8 @@ export function CodeShowcase() {
                 transition={{ duration: 0.3 }}
               >
                 <CodeBlock
-                  code={codeSnippets[activeTab].code}
-                  filename={codeSnippets[activeTab].filename}
+                  code={landingCodeShowcaseSnippets[activeTab].code}
+                  filename={landingCodeShowcaseSnippets[activeTab].filename}
                   language="typescript"
                 />
               </motion.div>

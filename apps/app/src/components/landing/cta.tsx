@@ -3,25 +3,16 @@
 import { motion } from "framer-motion";
 import { Github } from "lucide-react";
 import { BrutalButton } from "@/components/ui/brutal-button";
+import {
+  landingCtaDecorativeSquares,
+  landingHeroInstallCommand,
+} from "@/lib/landing/content";
 import { fadeInUp, scrollTrigger } from "@/lib/motion";
-
-const decorativeSquares = [
-  { size: 8, top: "2.5rem", left: "10%", rotate: 12, opacity: 0.2, delay: "0s" },
-  { size: 12, top: "5rem", right: "15%", rotate: -8, opacity: 0.3, delay: "0.5s" },
-  { size: 16, bottom: "4rem", left: "20%", rotate: 45, opacity: 0.4, delay: "1s" },
-  { size: 20, bottom: "6rem", right: "12%", rotate: -15, opacity: 0.2, delay: "1.5s" },
-  { size: 10, top: "8rem", left: "5%", rotate: 30, opacity: 0.3, delay: "2s" },
-  { size: 14, top: "3rem", right: "8%", rotate: -45, opacity: 0.25, delay: "0.8s" },
-  { size: 8, bottom: "10rem", left: "35%", rotate: 20, opacity: 0.35, delay: "1.2s" },
-  { size: 18, bottom: "3rem", right: "30%", rotate: -10, opacity: 0.2, delay: "1.8s" },
-  { size: 12, top: "12rem", right: "25%", rotate: 60, opacity: 0.3, delay: "0.3s" },
-  { size: 10, bottom: "8rem", left: "8%", rotate: -25, opacity: 0.4, delay: "2.2s" },
-];
 
 export function CTA() {
   return (
     <section className="bg-black py-20 sm:py-32 relative overflow-hidden">
-      {decorativeSquares.map((sq, i) => (
+      {landingCtaDecorativeSquares.map((sq, i) => (
         <div
           key={i}
           className="absolute bg-accent"
@@ -104,7 +95,7 @@ export function CTA() {
             style={{ transform: "rotate(1deg)" }}
           >
             <p className="font-mono text-xs sm:text-sm text-gray-300">
-              $ npx better-registry add exa-search
+              $ {landingHeroInstallCommand}
               <span
                 className="ml-1 inline-block w-2 h-4 bg-accent align-middle"
                 style={{ animation: "blink 1s step-end infinite" }}
