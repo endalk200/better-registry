@@ -1,41 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot, Code, Layers } from "lucide-react";
 import { BrutalCard } from "@/components/ui/brutal-card";
 import { BrutalBadge } from "@/components/ui/brutal-badge";
 import { SectionHeading } from "@/components/ui/section-heading";
+import {
+  landingAgentTeasers,
+  landingAgentToolLabels,
+} from "@/lib/landing/content";
 import { fadeInUp, staggerContainer, scrollTrigger } from "@/lib/motion";
-import type { LucideIcon } from "lucide-react";
-
-interface AgentTeaser {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
-
-const agentTeasers: AgentTeaser[] = [
-  {
-    icon: Bot,
-    title: "Research Agent",
-    description:
-      "Deep research agent that searches, reads, synthesizes, and produces structured reports.",
-  },
-  {
-    icon: Code,
-    title: "Coding Agent",
-    description:
-      "Code generation agent with web search, documentation lookup, and iterative refinement.",
-  },
-  {
-    icon: Layers,
-    title: "Data Agent",
-    description:
-      "Extract, transform, and analyze data from multiple sources with natural language.",
-  },
-];
-
-const toolLabels = ["Search", "Analyze", "Report"];
 
 export function AgentsShowcase() {
   return (
@@ -74,7 +47,7 @@ export function AgentsShowcase() {
             >
               {/* Tool boxes */}
               <div className="flex justify-center gap-8 sm:gap-16 mb-4 sm:mb-6">
-                {toolLabels.map((label) => (
+                {landingAgentToolLabels.map((label) => (
                   <div
                     key={label}
                     className="px-3 sm:px-4 py-2 border-2 border-black bg-accent text-black font-mono text-xs sm:text-sm font-semibold"
@@ -86,7 +59,7 @@ export function AgentsShowcase() {
 
               {/* Dashed connectors */}
               <div className="h-6 sm:h-8 flex justify-center items-center gap-8 sm:gap-16">
-                {toolLabels.map((label) => (
+                {landingAgentToolLabels.map((label) => (
                   <div
                     key={`line-${label}`}
                     className="w-0 h-full border-l-2 border-dashed border-accent"
@@ -112,7 +85,7 @@ export function AgentsShowcase() {
           viewport={scrollTrigger}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-10 sm:mt-12"
         >
-          {agentTeasers.map((agent) => {
+          {landingAgentTeasers.map((agent) => {
             const Icon = agent.icon;
 
             return (

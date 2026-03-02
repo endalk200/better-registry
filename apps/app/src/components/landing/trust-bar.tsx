@@ -2,32 +2,15 @@
 
 import { motion } from "framer-motion";
 import { Marquee } from "@/components/ui/marquee";
+import { landingSdkNames, landingStats } from "@/lib/landing/content";
 import { fadeInUp, scrollTrigger } from "@/lib/motion";
-
-const sdkNames = [
-  "Vercel AI SDK",
-  "TanStack AI",
-  "OpenAI",
-  "Anthropic",
-  "Google AI",
-  "Mistral",
-  "Groq",
-  "Cohere",
-];
-
-const stats = [
-  { value: "1", label: "Tool available" },
-  { value: "0", label: "Agents", comingSoon: true },
-  { value: "2", label: "SDK adapters" },
-  { value: "100%", label: "Open source" },
-];
 
 export function TrustBar() {
   return (
     <section className="w-full bg-black text-white py-6 sm:py-8">
       {/* SDK Marquee */}
       <Marquee speed={25}>
-        {sdkNames.map((name) => (
+        {landingSdkNames.map((name) => (
           <span key={name} className="flex items-center">
             <span className="text-sm sm:text-base font-mono text-white/80 whitespace-nowrap">
               {name}
@@ -46,7 +29,7 @@ export function TrustBar() {
         viewport={scrollTrigger}
       >
         <div className="grid grid-cols-2 sm:grid-cols-4 divide-x-2 sm:divide-x-3 divide-white/20 gap-y-6">
-          {stats.map((stat) => (
+          {landingStats.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col items-center text-center px-4"

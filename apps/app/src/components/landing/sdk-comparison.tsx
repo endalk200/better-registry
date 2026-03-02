@@ -3,38 +3,13 @@
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CodeBlock } from "@/components/ui/code-block";
+import { landingTanstackCode, landingVercelCode } from "@/lib/landing/content";
 import {
   fadeInUp,
   slideInLeft,
   slideInRight,
   scrollTrigger,
 } from "@/lib/motion";
-
-const vercelCode = `import { generateText } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { createExaWebSearchTool } from "@ai-registry/exa";
-
-const { text } = await generateText({
-  model: openai("gpt-4o-mini"),
-  tools: {
-    webSearch: createExaWebSearchTool(),
-  },
-  prompt: "Find recent AI papers",
-});`;
-
-const tanstackCode = `import { chat } from "@tanstack/ai";
-import { openaiText } from "@tanstack/ai-openai";
-import {
-  createTanstackExaWebSearchTool
-} from "@ai-registry/exa/tanstack-ai";
-
-const result = chat({
-  adapter: openaiText("gpt-4o-mini"),
-  tools: [createTanstackExaWebSearchTool()],
-  messages: [
-    { role: "user", content: "Find recent AI papers" }
-  ],
-});`;
 
 export function SDKComparison() {
   return (
@@ -56,7 +31,7 @@ export function SDKComparison() {
             <CodeBlock
               filename="vercel-ai-sdk.ts"
               language="typescript"
-              code={vercelCode}
+              code={landingVercelCode}
             />
           </motion.div>
 
@@ -69,7 +44,7 @@ export function SDKComparison() {
             <CodeBlock
               filename="tanstack-ai.ts"
               language="typescript"
-              code={tanstackCode}
+              code={landingTanstackCode}
             />
           </motion.div>
         </div>

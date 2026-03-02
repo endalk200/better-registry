@@ -3,64 +3,20 @@
 import { motion } from "framer-motion";
 import {
   Search,
-  Globe,
-  Terminal,
-  Monitor,
-  Mail,
   Copy,
   Check,
 } from "lucide-react";
 import { BrutalCard } from "@/components/ui/brutal-card";
 import { BrutalBadge } from "@/components/ui/brutal-badge";
 import { SectionHeading } from "@/components/ui/section-heading";
+import {
+  landingComingSoonTools,
+  landingHeroInstallCommand,
+  landingPrimaryToolTags,
+  type LandingToolTeaser,
+} from "@/lib/landing/content";
 import { fadeInUp, staggerContainer, scrollTrigger } from "@/lib/motion";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import type { LucideIcon } from "lucide-react";
-
-interface ComingSoonTool {
-  icon: LucideIcon;
-  name: string;
-  description: string;
-  tags: string[];
-}
-
-const comingSoonTools: ComingSoonTool[] = [
-  {
-    icon: Globe,
-    name: "firecrawl-scrape",
-    description:
-      "Web scraping and crawling powered by Firecrawl. Extract clean content from any URL.",
-    tags: ["scraping", "crawling"],
-  },
-  {
-    icon: Search,
-    name: "tavily-search",
-    description:
-      "AI-optimized web search via Tavily. Built for RAG and agent workflows.",
-    tags: ["web-search", "rag"],
-  },
-  {
-    icon: Terminal,
-    name: "e2b-sandbox",
-    description:
-      "Secure code execution sandbox powered by E2B. Run untrusted code safely.",
-    tags: ["code-exec", "sandbox"],
-  },
-  {
-    icon: Monitor,
-    name: "browserbase-browse",
-    description:
-      "AI-powered web browsing via Browserbase. Navigate, click, extract.",
-    tags: ["browsing", "automation"],
-  },
-  {
-    icon: Mail,
-    name: "resend-email",
-    description:
-      "Send transactional emails through Resend. Perfect for AI notification workflows.",
-    tags: ["email", "notifications"],
-  },
-];
 
 function ExaSearchCard() {
   const { copied, copy } = useCopyToClipboard();
@@ -87,7 +43,7 @@ function ExaSearchCard() {
       </p>
 
       <div className="flex gap-2 mt-3">
-        {["web-search", "neural", "scraping"].map((tag) => (
+        {landingPrimaryToolTags.map((tag) => (
           <span
             key={tag}
             className="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-0.5 border border-gray-200"
@@ -98,10 +54,10 @@ function ExaSearchCard() {
       </div>
 
       <div className="bg-gray-950 text-accent font-mono text-xs px-3 py-2 border-2 border-black flex items-center justify-between gap-2 mt-4">
-        <span className="truncate">npx better-registry add exa-search</span>
+        <span className="truncate">{landingHeroInstallCommand}</span>
         <button
           type="button"
-          onClick={() => copy("npx better-registry add exa-search")}
+          onClick={() => copy(landingHeroInstallCommand)}
           className="shrink-0 p-1 hover:text-white transition-colors"
           aria-label="Copy install command"
         >
@@ -116,7 +72,7 @@ function ExaSearchCard() {
   );
 }
 
-function ComingSoonCard({ tool }: { tool: ComingSoonTool }) {
+function ComingSoonCard({ tool }: { tool: LandingToolTeaser }) {
   const Icon = tool.icon;
 
   return (
@@ -177,7 +133,7 @@ export function ToolsShowcase() {
             <ExaSearchCard />
           </motion.div>
 
-          {comingSoonTools.map((tool) => (
+          {landingComingSoonTools.map((tool) => (
             <motion.div key={tool.name} variants={fadeInUp}>
               <ComingSoonCard tool={tool} />
             </motion.div>

@@ -12,54 +12,14 @@ import {
 import { BrutalBadge } from "@/components/ui/brutal-badge";
 import { BrutalButton } from "@/components/ui/brutal-button";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
+import {
+  landingHeroAccentWords,
+  landingHeroCodePreview,
+  landingHeroHeadlineWords,
+  landingHeroInstallCommand,
+  landingHeroTerminalLines,
+} from "@/lib/landing/content";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-
-const INSTALL_COMMAND = "npx better-registry add exa-search";
-
-const headlineWords = [
-  { text: "The", accent: false },
-  { text: "shadcn", accent: false },
-];
-
-const headlineAccentWords = [
-  { text: "for", accent: true },
-  { text: "AI.", accent: true },
-];
-
-const terminalLines = [
-  {
-    type: "command" as const,
-    text: "npx better-registry add exa-search",
-    delay: 0.6,
-  },
-  {
-    type: "output" as const,
-    text: "✓ Installing @ai-registry/exa...",
-    delay: 1.2,
-  },
-  {
-    type: "output" as const,
-    text: "✓ Adding core/exa-web-search.ts",
-    delay: 1.6,
-  },
-  { type: "output" as const, text: "✓ Adding adapters/ai-sdk.ts", delay: 1.9 },
-  {
-    type: "output" as const,
-    text: "✓ Adding adapters/tanstack-ai.ts",
-    delay: 2.2,
-  },
-  { type: "success" as const, text: "Done. Tool ready to use.", delay: 2.6 },
-];
-
-const codePreview = `import { createExaWebSearchTool } from "@/tools/exa";
-
-const { text } = await generateText({
-  model: openai("gpt-4o-mini"),
-  tools: {
-    webSearch: createExaWebSearchTool(),
-  },
-  prompt: "Latest AI research papers",
-});`;
 
 export function Hero() {
   const { copied, copy } = useCopyToClipboard();
@@ -94,7 +54,7 @@ export function Hero() {
             {/* Headline */}
             <motion.h1 className="mb-6" variants={fadeInUp}>
               <span className="block">
-                {headlineWords.map((word, i) => (
+                {landingHeroHeadlineWords.map((word, i) => (
                   <motion.span
                     key={i}
                     className="inline-block text-5xl sm:text-6xl lg:text-[5rem] font-black text-black leading-[1.1] mr-4"
@@ -111,7 +71,7 @@ export function Hero() {
                 ))}
               </span>
               <span className="block mt-2">
-                {headlineAccentWords.map((word, i) => (
+                {landingHeroAccentWords.map((word, i) => (
                   <motion.span
                     key={i}
                     className="inline-block text-5xl sm:text-6xl lg:text-[5rem] font-black leading-[1.1] mr-4"
@@ -159,10 +119,10 @@ export function Hero() {
               {/* Terminal command */}
               <div className="bg-white border-brutal shadow-brutal px-4 sm:px-6 py-3 flex items-center gap-3 font-mono text-sm sm:text-base select-all">
                 <Terminal className="w-4 h-4 text-gray-400 shrink-0 select-none" />
-                <span className="text-black">{INSTALL_COMMAND}</span>
+                <span className="text-black">{landingHeroInstallCommand}</span>
                 <button
                   type="button"
-                  onClick={() => copy(INSTALL_COMMAND)}
+                  onClick={() => copy(landingHeroInstallCommand)}
                   className="ml-2 shrink-0 cursor-pointer text-gray-400 hover:text-black transition-colors select-none"
                   aria-label="Copy command"
                 >
@@ -224,7 +184,7 @@ export function Hero() {
 
               {/* Terminal content */}
               <div className="p-4 font-mono text-sm space-y-1.5 min-h-[180px]">
-                {terminalLines.map((line, i) => (
+                {landingHeroTerminalLines.map((line, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -10 }}
@@ -301,7 +261,7 @@ export function Hero() {
               {/* Code */}
               <div className="p-4 overflow-x-auto">
                 <pre className="text-xs font-mono leading-relaxed text-gray-300">
-                  {codePreview.split("\n").map((line, i) => (
+                  {landingHeroCodePreview.split("\n").map((line, i) => (
                     <motion.div
                       key={i}
                       initial={{ opacity: 0 }}

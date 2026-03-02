@@ -1,37 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, Package, Zap } from "lucide-react";
 import { BrutalCard } from "@/components/ui/brutal-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { landingHowItWorksSteps } from "@/lib/landing/content";
 import { fadeInUp, staggerContainer, scrollTrigger } from "@/lib/motion";
-
-const steps = [
-  {
-    number: "01",
-    title: "Install the CLI",
-    icon: Terminal,
-    code: "npx better-registry init",
-    description:
-      "Initialize your project configuration. Detects your AI SDK and sets up imports.",
-  },
-  {
-    number: "02",
-    title: "Add a tool",
-    icon: Package,
-    code: "npx better-registry add exa-search",
-    description:
-      "Browse the registry and add any tool. Source code is copied directly into your project — you own it.",
-  },
-  {
-    number: "03",
-    title: "Build with it",
-    icon: Zap,
-    code: 'import { createExaWebSearchTool } from "./tools/exa";',
-    description:
-      "Import and use. Works with your existing AI SDK setup. Customize anything — it's your code now.",
-  },
-];
 
 export function HowItWorks() {
   return (
@@ -53,7 +26,7 @@ export function HowItWorks() {
           {/* Connecting dashed line between step numbers (desktop only) */}
           <div className="hidden md:block absolute top-6 left-[calc(16.67%+2rem)] right-[calc(16.67%+2rem)] border-t-3 border-dashed border-black" />
 
-          {steps.map((step) => (
+          {landingHowItWorksSteps.map((step) => (
             <motion.div key={step.number} variants={fadeInUp} className="relative">
               <BrutalCard hoverable className="relative pt-10 sm:pt-12">
                 {/* Step number circle */}
