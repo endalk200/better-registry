@@ -3,7 +3,6 @@ import { openai } from "@ai-sdk/openai";
 import { openrouter } from "@openrouter/ai-sdk-provider";
 import {
   type ChatErrorCode,
-  type PlaygroundMessage,
   CHAT_LIMITS,
   chatRequestSchema,
 } from "@/lib/playground/chat-contract";
@@ -100,11 +99,8 @@ export async function POST(req: Request) {
     );
   }
 
-  const { messages, model, provider } = parsed.data as {
-    messages: PlaygroundMessage[];
-    model: string;
-    provider: "openai" | "openrouter";
-  };
+  const { model, provider } = parsed.data;
+  const { messages } = parsed.data;
 
   if (!isProviderConfigured(provider)) {
     return createErrorResponse(

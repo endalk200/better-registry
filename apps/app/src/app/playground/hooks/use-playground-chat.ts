@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import type { ChatStatus } from "ai";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import type { PromptInputMessage } from "@/components/ai-elements/prompt-input";
 import {
   messageMetadataSchema,
@@ -33,12 +33,11 @@ export const usePlaygroundChat = (): UsePlaygroundChatResult => {
   const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL.id);
 
   const currentModel =
-    PLAYGROUND_MODELS.find((model) => model.id === selectedModel) ?? DEFAULT_MODEL;
+    PLAYGROUND_MODELS.find((model) => model.id === selectedModel) ??
+    DEFAULT_MODEL;
 
   const currentModelRef = useRef(currentModel);
-  useEffect(() => {
-    currentModelRef.current = currentModel;
-  }, [currentModel]);
+  currentModelRef.current = currentModel;
 
   const transport = useMemo(
     () =>
@@ -64,7 +63,7 @@ export const usePlaygroundChat = (): UsePlaygroundChatResult => {
           },
         }),
       }),
-    []
+    [],
   );
 
   const { messages, status, sendMessage, regenerate, stop } =
@@ -74,8 +73,11 @@ export const usePlaygroundChat = (): UsePlaygroundChatResult => {
     });
 
   const isGenerating = status === "submitted" || status === "streaming";
-  const hasAssistantMessages = messages.some((message) => message.role === "assistant");
-  const canRegenerate = hasAssistantMessages && !isGenerating && status !== "error";
+  const hasAssistantMessages = messages.some(
+    (message) => message.role === "assistant",
+  );
+  const canRegenerate =
+    hasAssistantMessages && !isGenerating && status !== "error";
 
   const submit = useCallback(
     (message: PromptInputMessage) => {
@@ -89,14 +91,14 @@ export const usePlaygroundChat = (): UsePlaygroundChatResult => {
       });
       setText("");
     },
-    [sendMessage]
+    [sendMessage],
   );
 
   const sendSuggestion = useCallback(
     (suggestion: string) => {
       sendMessage({ text: suggestion });
     },
-    [sendMessage]
+    [sendMessage],
   );
 
   const regenerateLast = useCallback(() => {

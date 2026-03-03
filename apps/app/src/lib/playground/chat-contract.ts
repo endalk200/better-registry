@@ -31,13 +31,20 @@ export const PLAYGROUND_SUGGESTIONS = [
 export const playgroundProviderSchema = z.enum(["openai", "openrouter"]);
 export type PlaygroundProvider = z.infer<typeof playgroundProviderSchema>;
 
+const providerModelAllowlist = PLAYGROUND_MODELS.reduce(
+  (acc, model) => {
+    acc[model.provider].push(model.id);
+    return acc;
+  },
+  {
+    openai: [] as string[],
+    openrouter: [] as string[],
+  },
+);
+
 export const PLAYGROUND_PROVIDER_MODEL_ALLOWLIST = {
-  openai: ["gpt-4o", "gpt-4o-mini"],
-  openrouter: [
-    "anthropic/claude-sonnet-4",
-    "google/gemini-2.0-flash",
-    "meta-llama/llama-3.1-70b-instruct",
-  ],
+  openai: providerModelAllowlist.openai,
+  openrouter: providerModelAllowlist.openrouter,
 } as const satisfies Record<PlaygroundProvider, readonly string[]>;
 
 export const CHAT_LIMITS = {
@@ -69,17 +76,18 @@ const chatMessagePartSchema = z
 const chatMessageSchema = z
   .object({
     id: z.string().min(1),
-    role: z.enum(["system", "user", "assistant", "tool"]),
+    role: z.enum(["system", "user", "assistant"]),
     parts: z.array(chatMessagePartSchema).min(1),
+    metadata: messageMetadataSchema.optional(),
   })
   .passthrough();
 
 export const isAllowedModelForProvider = (
   provider: PlaygroundProvider,
-  model: string
+  model: string,
 ): boolean =>
   (PLAYGROUND_PROVIDER_MODEL_ALLOWLIST[provider] as readonly string[]).includes(
-    model
+    model,
   );
 
 export const chatRequestSchema = z
@@ -133,7 +141,11 @@ export const chatRequestSchema = z
         path: ["messages"],
       });
     }
-  });
+  })
+  .transform((value) => ({
+    ...value,
+    messages: value.messages as PlaygroundMessage[],
+  }));
 
 export const chatErrorCodeSchema = z.enum([
   "forbidden",

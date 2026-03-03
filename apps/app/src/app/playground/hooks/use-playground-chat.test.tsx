@@ -1,9 +1,14 @@
 import { act, renderHook } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { usePlaygroundChat } from "@/app/playground/hooks/use-playground-chat";
 
 const useChatMock = vi.fn();
 let lastTransportOptions: Record<string, unknown> | undefined;
+
+beforeEach(() => {
+  lastTransportOptions = undefined;
+  useChatMock.mockReset();
+});
 
 vi.mock("@ai-sdk/react", () => ({
   useChat: (...args: unknown[]) => useChatMock(...args),
@@ -63,20 +68,20 @@ describe("usePlaygroundChat", () => {
 
     const { result } = renderHook(() => usePlaygroundChat());
 
-    const prepareSendMessagesRequest = lastTransportOptions
-      ?.prepareSendMessagesRequest as
-      | ((value: {
-          api: string;
-          body: Record<string, unknown>;
-          credentials: RequestCredentials | undefined;
-          headers: HeadersInit | undefined;
-          id: string;
-          messageId: string | undefined;
-          messages: unknown[];
-          requestMetadata: unknown;
-          trigger: "submit-message" | "regenerate-message";
-        }) => { body: Record<string, unknown> })
-      | undefined;
+    const prepareSendMessagesRequest =
+      lastTransportOptions?.prepareSendMessagesRequest as
+        | ((value: {
+            api: string;
+            body: Record<string, unknown>;
+            credentials: RequestCredentials | undefined;
+            headers: HeadersInit | undefined;
+            id: string;
+            messageId: string | undefined;
+            messages: unknown[];
+            requestMetadata: unknown;
+            trigger: "submit-message" | "regenerate-message";
+          }) => { body: Record<string, unknown> })
+        | undefined;
 
     expect(prepareSendMessagesRequest).toBeTypeOf("function");
 
@@ -111,7 +116,9 @@ describe("usePlaygroundChat", () => {
       headers: undefined,
       id: "chat-1",
       messageId: "m-123",
-      messages: [{ id: "m-user", role: "user", parts: [{ type: "text", text: "x" }] }],
+      messages: [
+        { id: "m-user", role: "user", parts: [{ type: "text", text: "x" }] },
+      ],
       requestMetadata: undefined,
       trigger: "regenerate-message",
     });
@@ -121,7 +128,9 @@ describe("usePlaygroundChat", () => {
       id: "chat-1",
       messageId: "m-123",
       model: "google/gemini-2.0-flash",
-      messages: [{ id: "m-user", role: "user", parts: [{ type: "text", text: "x" }] }],
+      messages: [
+        { id: "m-user", role: "user", parts: [{ type: "text", text: "x" }] },
+      ],
       provider: "openrouter",
       trigger: "regenerate-message",
     });
