@@ -42,10 +42,10 @@ const providerModelAllowlist = PLAYGROUND_MODELS.reduce(
   },
 );
 
-export const PLAYGROUND_PROVIDER_MODEL_ALLOWLIST = {
-  openai: providerModelAllowlist.openai,
-  openrouter: providerModelAllowlist.openrouter,
-} as const satisfies Record<PlaygroundProvider, readonly string[]>;
+export const PLAYGROUND_PROVIDER_MODEL_ALLOWLIST = Object.freeze({
+  openai: Object.freeze([...providerModelAllowlist.openai]),
+  openrouter: Object.freeze([...providerModelAllowlist.openrouter]),
+}) satisfies Record<PlaygroundProvider, readonly string[]>;
 
 export const CHAT_LIMITS = {
   maxMessages: 40,

@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import type { ChatStatus } from "ai";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { PromptInputMessage } from "@/components/ai-elements/prompt-input";
 import {
   messageMetadataSchema,
@@ -37,7 +37,9 @@ export const usePlaygroundChat = (): UsePlaygroundChatResult => {
     DEFAULT_MODEL;
 
   const currentModelRef = useRef(currentModel);
-  currentModelRef.current = currentModel;
+  useEffect(() => {
+    currentModelRef.current = currentModel;
+  }, [currentModel]);
 
   const transport = useMemo(
     () =>

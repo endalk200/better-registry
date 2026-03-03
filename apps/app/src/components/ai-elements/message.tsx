@@ -17,7 +17,7 @@ import { code } from "@streamdown/code";
 import { math } from "@streamdown/math";
 import { mermaid } from "@streamdown/mermaid";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import {
+import React, {
   Children,
   createContext,
   isValidElement,
@@ -159,6 +159,16 @@ export const MessageBranch = ({
     },
     [onBranchChange],
   );
+
+  useEffect(() => {
+    if (branches.length === 0) {
+      return;
+    }
+
+    if (currentBranch >= branches.length) {
+      handleBranchChange(branches.length - 1);
+    }
+  }, [branches.length, currentBranch, handleBranchChange]);
 
   const goToPrevious = useCallback(() => {
     const newBranch =
