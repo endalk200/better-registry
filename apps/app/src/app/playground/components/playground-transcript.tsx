@@ -71,8 +71,8 @@ export const PlaygroundTranscript = ({
                 AI SDK Playground
               </h2>
               <p className="max-w-sm text-sm text-muted-foreground">
-                Test models from OpenAI and OpenRouter. No tools, no agents - just
-                the raw model.
+                Test models from OpenAI and OpenRouter. No tools, no agents -
+                just the raw model.
               </p>
             </div>
           </div>
@@ -90,6 +90,11 @@ export const PlaygroundTranscript = ({
         messages.map((message, messageIndex) => {
           const metadata = message.metadata as MessageMetadata | undefined;
           const isLast = messageIndex === messages.length - 1;
+          const textParts = message.parts.filter(
+            (part): part is { type: "text"; text: string } =>
+              part.type === "text" && typeof part.text === "string",
+          );
+          const assistantText = textParts.map((part) => part.text).join("\n");
 
           return (
             <div
@@ -99,44 +104,40 @@ export const PlaygroundTranscript = ({
               <div className="mx-auto max-w-3xl">
                 <Message from={message.role}>
                   <MessageContent>
-                    {message.parts.map((part, index) => {
-                      if (part.type !== "text") {
-                        return null;
-                      }
-
+                    {textParts.map((part, index) => {
                       return (
                         <Fragment key={`${message.id}-${index}`}>
                           <MessageResponse>{part.text}</MessageResponse>
-
-                          {message.role === "assistant" && (
-                            <div className="mt-2 flex items-center gap-2 opacity-0 transition-opacity group-hover/msg:opacity-100 group-focus-within/msg:opacity-100">
-                              <MessageActions className="mt-0!">
-                                <MessageAction
-                                  tooltip="Copy"
-                                  label="Copy"
-                                  onClick={() => {
-                                    void navigator.clipboard.writeText(part.text);
-                                  }}
-                                >
-                                  <CopyIcon className="size-3" />
-                                </MessageAction>
-                                {isLast && (
-                                  <MessageAction
-                                    tooltip="Regenerate"
-                                    label="Regenerate"
-                                    disabled={!canRegenerate}
-                                    onClick={onRegenerate}
-                                  >
-                                    <RefreshCcwIcon className="size-3" />
-                                  </MessageAction>
-                                )}
-                              </MessageActions>
-                              <TokenBadge metadata={metadata} />
-                            </div>
-                          )}
                         </Fragment>
                       );
                     })}
+
+                    {message.role === "assistant" && (
+                      <div className="mt-2 flex items-center gap-2 opacity-0 transition-opacity group-hover/msg:opacity-100 group-focus-within/msg:opacity-100">
+                        <MessageActions className="mt-0!">
+                          <MessageAction
+                            tooltip="Copy"
+                            label="Copy"
+                            onClick={() => {
+                              void navigator.clipboard.writeText(assistantText);
+                            }}
+                          >
+                            <CopyIcon className="size-3" />
+                          </MessageAction>
+                          {isLast && (
+                            <MessageAction
+                              tooltip="Regenerate"
+                              label="Regenerate"
+                              disabled={!canRegenerate}
+                              onClick={onRegenerate}
+                            >
+                              <RefreshCcwIcon className="size-3" />
+                            </MessageAction>
+                          )}
+                        </MessageActions>
+                        <TokenBadge metadata={metadata} />
+                      </div>
+                    )}
                   </MessageContent>
                 </Message>
               </div>
@@ -156,7 +157,8 @@ export const PlaygroundTranscript = ({
           role: message.role,
           content: message.parts
             .filter(
-              (part): part is { type: "text"; text: string } => part.type === "text"
+              (part): part is { type: "text"; text: string } =>
+                part.type === "text",
             )
             .map((part) => part.text)
             .join("\n"),

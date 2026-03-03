@@ -50,7 +50,7 @@ describe("POST /api/chat contract", () => {
           host: "example.com",
         },
         body: JSON.stringify(validBody),
-      })
+      }),
     );
 
     const data = await response.json();
@@ -62,7 +62,7 @@ describe("POST /api/chat contract", () => {
     const response = await POST(
       buildRequest({
         messages: validBody.messages,
-      })
+      }),
     );
 
     const data = await response.json();
@@ -75,7 +75,7 @@ describe("POST /api/chat contract", () => {
       buildRequest({
         ...validBody,
         model: "anthropic/claude-sonnet-4",
-      })
+      }),
     );
 
     const data = await response.json();
@@ -94,7 +94,7 @@ describe("POST /api/chat contract", () => {
             parts: [{ type: "text", text: "x".repeat(20_001) }],
           },
         ],
-      })
+      }),
     );
 
     const data = await response.json();
@@ -109,7 +109,7 @@ describe("POST /api/chat contract", () => {
         requestMetadata: {
           debug: "x".repeat(250_000),
         },
-      })
+      }),
     );
 
     const data = await response.json();
@@ -121,6 +121,23 @@ describe("POST /api/chat contract", () => {
     const response = await POST(buildRequest(validBody));
     const data = await response.json();
 
+    expect(response.status).toBe(503);
+    expect(data.error.code).toBe("provider_not_configured");
+  });
+
+  it("accepts bracketed IPv6 localhost hosts", async () => {
+    const response = await POST(
+      new Request("http://[::1]:3000/api/chat", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          host: "[::1]:3000",
+        },
+        body: JSON.stringify(validBody),
+      }),
+    );
+
+    const data = await response.json();
     expect(response.status).toBe(503);
     expect(data.error.code).toBe("provider_not_configured");
   });

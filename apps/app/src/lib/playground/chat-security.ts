@@ -17,7 +17,22 @@ const normalizeHost = (value: string | null): string => {
   if (!value) {
     return "";
   }
-  return value.split(",")[0]?.trim().split(":")[0]?.toLowerCase() ?? "";
+
+  const first = value.split(",")[0]?.trim().toLowerCase() ?? "";
+  if (!first) {
+    return "";
+  }
+
+  if (first.startsWith("[")) {
+    const bracketEnd = first.indexOf("]");
+    if (bracketEnd > 0) {
+      return first.slice(1, bracketEnd);
+    }
+
+    return first;
+  }
+
+  return first.split(":")[0] ?? "";
 };
 
 const isLocalHost = (host: string): boolean =>
@@ -26,7 +41,8 @@ const isLocalHost = (host: string): boolean =>
 const isLocalRequest = (req: Request): boolean => {
   const requestHost = (() => {
     try {
-      return new URL(req.url).hostname.toLowerCase();
+      const url = new URL(req.url);
+      return normalizeHost(url.host || url.hostname);
     } catch {
       return "";
     }
