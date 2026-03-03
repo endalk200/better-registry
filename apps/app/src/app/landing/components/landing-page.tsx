@@ -27,7 +27,9 @@ export const LandingPage = () => (
     <Navigation />
     <main>
       {LANDING_SECTIONS.map(({ id, Component }) => (
-        <Component key={id} />
+        <div key={id} id={id}>
+          <Component />
+        </div>
       ))}
     </main>
     <Footer />

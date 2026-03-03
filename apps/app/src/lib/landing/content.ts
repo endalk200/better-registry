@@ -25,14 +25,24 @@ export const landingNavLinks: LandingNavLink[] = [
   { label: "Agents", href: "#agents" },
   { label: "Playground", href: "/playground" },
   { label: "Docs", href: "#docs" },
-  { label: "GitHub", href: "https://github.com", external: true },
+  {
+    label: "GitHub",
+    href: "https://github.com/endalk200/better-registry",
+    external: true,
+  },
 ];
 
 export const landingHeroInstallCommand = "npx better-registry add exa-search";
 
-export const landingHeroHeadlineWords = [{ text: "The" }, { text: "shadcn" }] as const;
+export const landingHeroHeadlineWords = [
+  { text: "The" },
+  { text: "shadcn" },
+] as const;
 
-export const landingHeroAccentWords = [{ text: "for" }, { text: "AI." }] as const;
+export const landingHeroAccentWords = [
+  { text: "for" },
+  { text: "AI." },
+] as const;
 
 export const landingHeroTerminalLines = [
   {
@@ -157,11 +167,12 @@ export const landingFeatures: LandingFeature[] = [
 
 export type LandingCodeTab = "core" | "ai-sdk" | "tanstack";
 
-export const landingCodeShowcaseTabs: { id: LandingCodeTab; label: string }[] = [
-  { id: "core", label: "Core" },
-  { id: "ai-sdk", label: "AI SDK" },
-  { id: "tanstack", label: "TanStack" },
-];
+export const landingCodeShowcaseTabs: { id: LandingCodeTab; label: string }[] =
+  [
+    { id: "core", label: "Core" },
+    { id: "ai-sdk", label: "AI SDK" },
+    { id: "tanstack", label: "TanStack" },
+  ];
 
 export const landingCodeShowcaseDescriptions: Record<LandingCodeTab, string> = {
   core: "Start with the core. Zero dependencies, zero framework opinions. Just a typed async function that calls Exa's API. Use it in any JavaScript runtime - Node, Deno, Bun, edge functions.",
@@ -339,7 +350,14 @@ const result = chat({
 });`;
 
 export const landingCtaDecorativeSquares = [
-  { size: 8, top: "2.5rem", left: "10%", rotate: 12, opacity: 0.2, delay: "0s" },
+  {
+    size: 8,
+    top: "2.5rem",
+    left: "10%",
+    rotate: 12,
+    opacity: 0.2,
+    delay: "0s",
+  },
   {
     size: 12,
     top: "5rem",
