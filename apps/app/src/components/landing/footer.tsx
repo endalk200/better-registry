@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer className="bg-white border-t-3 border-black py-10 sm:py-16">
@@ -39,12 +41,12 @@ export function Footer() {
                   SOON
                 </span>
               </a>
-              <a
+              <Link
                 href="/playground"
                 className="text-sm text-gray-600 hover:text-black transition-colors"
               >
                 Playground
-              </a>
+              </Link>
               <a
                 href="#"
                 className="text-sm text-gray-600 hover:text-black transition-colors"
