@@ -118,7 +118,9 @@ export const PlaygroundTranscript = ({
                           <MessageAction
                             tooltip="Copy"
                             label="Copy"
+                            disabled={!assistantText.trim()}
                             onClick={() => {
+                              if (!assistantText.trim()) return;
                               void navigator.clipboard.writeText(assistantText);
                             }}
                           >
@@ -158,7 +160,7 @@ export const PlaygroundTranscript = ({
           content: message.parts
             .filter(
               (part): part is { type: "text"; text: string } =>
-                part.type === "text",
+                part.type === "text" && typeof part.text === "string",
             )
             .map((part) => part.text)
             .join("\n"),

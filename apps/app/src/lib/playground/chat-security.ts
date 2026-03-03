@@ -42,7 +42,7 @@ const isLocalRequest = (req: Request): boolean => {
   const requestHost = (() => {
     try {
       const url = new URL(req.url);
-      return normalizeHost(url.host || url.hostname);
+      return normalizeHost(url.host);
     } catch {
       return "";
     }
