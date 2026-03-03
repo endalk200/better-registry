@@ -1,16 +1,25 @@
 import { expect, test } from "@playwright/test";
 
-test("playground smoke flow: send, stop, regenerate, export", async ({ page }) => {
+test("playground smoke flow: send, stop, regenerate, export", async ({
+  page,
+}) => {
   test.skip(
     process.env.PLAYGROUND_SMOKE_E2E !== "true",
-    "Set PLAYGROUND_SMOKE_E2E=true to run smoke e2e."
+    "Set PLAYGROUND_SMOKE_E2E=true to run smoke e2e.",
   );
 
   await page.goto("/playground");
   await expect(page.getByText("AI SDK Playground")).toBeVisible();
 
   await page.getByLabel("Message input").fill("Say hello in one sentence.");
+  const chatResponse = page.waitForResponse(
+    (response) =>
+      response.url().includes("/api/chat") &&
+      response.request().method() === "POST" &&
+      response.status() < 400,
+  );
   await page.getByRole("button", { name: "Submit" }).click();
+  await expect(chatResponse).resolves.toBeTruthy();
 
   const stopButton = page.getByRole("button", { name: "Stop" });
   if (await stopButton.isVisible().catch(() => false)) {
